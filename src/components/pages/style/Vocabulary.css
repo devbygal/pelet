@@ -1,0 +1,56 @@
+.tile {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background: rgb(78, 77, 77);
+    border-radius: 0.33rem;
+    max-width: 1000px;
+    min-height: 68px;
+    text-indent: 40px;
+    padding: 0.5rem 0rem 0.5rem 3rem;
+    margin: 5px 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: all .3s ease-in-out;
+}
+
+.tile:hover, .tile:focus {
+    background: rgba(255, 255, 255, 0.33);
+    cursor: pointer;
+}
+
+.tile[data-payload=false]:hover {
+    background: #c32828 !important;
+    transition: all 0.2s;
+}
+
+.tile[data-payload=false]::after {
+    content: "";
+    font-family: ElloIcons;
+    position: absolute;
+    left: 1rem;
+}
+
+.tile[data-payload=true]::after {
+    content: ">";
+    font-family: ElloIcons;
+    position: absolute;
+    left: 1rem;
+}
+
+.tile span {
+    font-size: 1.25rem;
+    margin: 0 1rem;
+    font-family: ElloIcons;
+}
+
+.tile img {
+    width: 1.25rem;
+    margin: 0 1rem;
+    font-family: ElloIcons;
+}
+
+.tile_desc {
+    color: rgba(var(--txt_clr), 0.66);
+    font-size: 0.8rem;
+}

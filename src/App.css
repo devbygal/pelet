@@ -1,0 +1,30 @@
+/* global styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  cursor: pointer;
+}
+
+.App {
+
+}
+
+.admin-nav {
+  padding-top: 0;
+  padding-bottom: 0;
+  background-color: #e8e9ea;
+  border-bottom: 1px solid #ccc;
+}
+
+.close-times {
+  font-size: 18px;
+  opacity: 0.8;
+}
+
+.close-times:hover {
+  opacity: 1;
+}
