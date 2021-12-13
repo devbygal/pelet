@@ -6,7 +6,12 @@ export const Vocabulary = ( ) => {
     const [words, setWords] = useState([]);
     useEffect(()=>{
         getWords();
-     },[words])
+
+        return () => {
+            console.log("clean-up")
+            getWords();
+        };
+     },[])
 
 const getWords=async()=>{
    await fetch("http://proj7.ruppin-tech.co.il/api/TechnicalWords",{
