@@ -13,6 +13,7 @@ import { Course } from './components/pages/Course';
 import { Exercise } from './components/pages/Exercise';
 import { Calculator } from './components/pages/Calculator';
 import { Vocabulary } from './components/pages/Vocabulary';
+import { Add } from './components/admin-components/addComponents/Add';
 
 function App() {
   const [user, setUser] = useState({});
@@ -35,6 +36,8 @@ function App() {
           <Route path="/exercise" element={<Exercise />} />
           <Route path="/calculator" element={<Calculator />} />
           <Route path="/vocabulary" element={<Vocabulary />} />
+          <Route path="/addContent" element={<Add />} />
+
         </Route>
         <Route path="/account/*" element={<Account />} />
         <Route path="*" element={<div>Not Found!</div>} />
