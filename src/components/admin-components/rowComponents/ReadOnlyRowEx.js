@@ -12,7 +12,7 @@ export const ReadOnlyRowEx = ({ contact, handleEditClick }) => {
       <td style={{width:'100px'}}>{contact.lessonCode}</td>
       <td style={{width:'100px'}}>{contact.question}</td>
       <td style={{width:'100px'}}>{contact.answer}</td>
-      <td style={{width:'100px'}}>{contact.description}</td>
+      <td style={{width:'100px',overflow:'hidden'}}>{contact.description}</td>
       <td style={{width:'100px'}}>
         <Button
           class="btn btn-primary mr-2 btnWdt"

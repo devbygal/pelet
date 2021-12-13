@@ -1,15 +1,15 @@
 import Button from "@restart/ui/esm/Button";
 import React from "react";
 import ChooseDeleteVids from "./ChooseDeleteVids";
-
+import './../admin-styles/readOnly.css'
 
 const ReadOnlyRowVids = ({ contact, handleEditClick }) => {
   
   return (
     <tr>
-      <td>{contact.studyLanguageCode}</td>
+      <td  >{contact.studyLanguageCode}</td>
       <td>{contact.lessonCode}</td>
-      <td>{contact.videoName}</td>
+      <td style={{overflow:'hidden'}}>{contact.videoName}</td>
       <td>{contact.description}</td>
 
       <td>

@@ -1,13 +1,15 @@
 import React, { Fragment, useEffect, useState } from "react";
 import "./style/Admin.css";
-import { EditableRow } from "../admin-components/EditableRow";
-import { EditableRowVids } from "../admin-components/EditableRowVids";
-import { ReadOnlyRow } from "../admin-components/ReadOnlyRow";
-import ReadOnlyRowVids from "../admin-components/ReadOnlyRowVids";
-import ReadOnlyRowEx from "../admin-components/ReadOnlyRowEx";
-import { EditableRowEx } from "../admin-components/EditableRowEx";
-
-
+import { EditableRow } from "../admin-components/rowComponents/EditableRow";
+import { EditableRowVids } from "../admin-components/rowComponents/EditableRowVids";
+import { ReadOnlyRow } from "../admin-components/rowComponents/ReadOnlyRow";
+import ReadOnlyRowVids from "../admin-components/rowComponents/ReadOnlyRowVids";
+import ReadOnlyRowEx from "../admin-components/rowComponents/ReadOnlyRowEx";
+import { EditableRowEx } from "../admin-components/rowComponents/EditableRowEx";
+import * as FiIcon from "react-icons/fi";
+import { Link } from "react-router-dom";
+import { CreateInserts } from "../admin-components/CreateInserts";
+import { exerciseService } from "../_services/exercise.service";
 
 
 export const Admin = () => {
@@ -18,8 +20,8 @@ export const Admin = () => {
   const [editContactId, setEditContactId] = useState(null);
   const [editVideoId, setEditVideoId] = useState(null);
   const [editExerciseId, setEditExerciseId] = useState(null);
+ 
 
-  // const vidLangs=["js","htmel"];
   const langsCodes=[10,20]
 
   useEffect(() => {
@@ -30,7 +32,9 @@ export const Admin = () => {
     getUsers();
   }, [users]);
   useEffect(() => {
-    getExercises();
+    exerciseService.getAllExercises().then((values) => {
+      setExercises(values)
+    })
   }, [exercises]);
   // פונקציות ללחצנים
   const [searchTerm, setSearchTerm] = useState("");
@@ -95,9 +99,7 @@ export const Admin = () => {
       })
       .then((result) => {
         if (result) {
-          
           setVideos(result);
-       
         } else {
            console.log("error");
         }
@@ -105,34 +107,39 @@ export const Admin = () => {
   };
 
   // ייבוא תרגולים
-  const getExercises = async () => {
-    await fetch("http://proj7.ruppin-tech.co.il/api/Exercises", {
-      method: "GET",
-      headers: {
-        Accept: "application/json; charset=UTF-8",
-        "Content-type": "application/json",
-      },
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((result) => {
-        if (result) {
-          
-          setExercises(result);
-       
-        } else {
-           console.log("error");
-        }
-      });
-  };
+  // const getExercises = async () => {
+  //   await fetch("http://proj7.ruppin-tech.co.il/api/Exercises", {
+  //     method: "GET",
+  //     headers: {
+  //       Accept: "application/json; charset=UTF-8",
+  //       "Content-type": "application/json",
+  //     },
+  //   })
+  //     .then((response) => {
+  //       return response.json();
+  //     })
+  //     .then((result) => {
+  //       if (result) {
+  //         setExercises(result);
+  //       } else {
+  //          console.log("error");
+  //       }
+  //     });
+  // };
 
   // השמת הנתונים בטבלאות עם פילטר לחיפוש בדף
   return (
     // טבלת משתמשים
     <div className="scroller">
+      <div style={{display:'flex',background:'brown',color:'beige'}}>
+      <Link style={{color:'beige'}} to="/admin">  <FiIcon.FiEdit  style={{width:'50px',height:'20px',marginRight:'40px'}} /> </Link> 
+          <h6 style={{paddingTop:'5px',flexDirection:'row'}}>  עריכת חומר</h6>
+        <Link style={{color:'beige'}} to="/addContent">  <FiIcon.FiPlusSquare  style={{width:'50px',height:'30px',marginRight:'40px'}} /> </Link> 
+          <h6 style={{paddingTop:'5px',flexDirection:'row'}}>  הוספת חומר</h6>
+        
+          </div>
       <div className="container">
-        <h1>דף מנהל</h1>
+        <h1>דף מנהל - עריכה+מחיקה</h1>
         <input
           type="text"
           placeholder=" חפש קוד.."
@@ -143,8 +150,8 @@ export const Admin = () => {
         <div className="py-4">
           <h2>טבלת משתמשים</h2>
           <form>
-            <table table class="table border shadow table1">
-              <thead class="thead-dark">
+            <table table className="table border shadow table1">
+              <thead className="thead-dark">
                 <tr>
                   <th scope="col">קוד משתמש</th>
                   <th scope="col">סוג משתמש</th>
@@ -163,6 +170,9 @@ export const Admin = () => {
                       return user;
                     } else if (user.id === parseInt(searchTerm)) {
                       return user;
+                    }
+                    else{
+                      return null;
                     }
                   })
                   .map((user) => (
@@ -212,6 +222,9 @@ export const Admin = () => {
                          } else if (video.lessonCode === parseInt(searchTerm)) {
                            return video;
                          }
+                         else{
+                          return null;
+                        }
                        })
                        .map((video) =>
                          video.studyLanguageCode === lang ? (
@@ -267,6 +280,9 @@ export const Admin = () => {
                          } else if (exercise.exerciseCode === parseInt(searchTerm)) {
                            return exercise;
                          }
+                         else{
+                          return null;
+                        }
                        })
                        .map((exercise) =>
                        exercise.studyLanguageCode === lang ? (
@@ -290,8 +306,8 @@ export const Admin = () => {
                </form>
              </div>
            </div>
-          
    ))}
+   {/* <CreateInserts/> */}
     </div>
   );
 };

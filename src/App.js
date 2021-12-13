@@ -8,45 +8,19 @@ import { Account } from './components/account/Index';
 import { Alert, Nav, PrivateRoute } from './components/_utils';
 import { Home } from './components/pages/Home';
 import { Profile } from './components/profile/Index';
-
+import { Admin } from './components/pages/Admin';
+import { Course } from './components/pages/Course';
+import { Exercise } from './components/pages/Exercise';
+import { Calculator } from './components/pages/Calculator';
+import { Vocabulary } from './components/pages/Vocabulary';
 
 function App() {
   const [user, setUser] = useState({});
 
-    // let users = localStorage.getItem('users');
-    // // lessonsService.lessons().then((values) => {
-    // //   console.log(values)
-    // // })
-    // //accountService.postAllUsers(JSON.parse(users));
   useEffect(() => {
     const subscription = accountService.user.subscribe(x => setUser(x));
     return subscription.unsubscribe;
   }, []);
-
-  // useEffect(() => {
-  //   // Load the todos on mount
-  //   const usersStrings = localStorage.getItem("users");
-  //   if (usersStrings) {
-  //     console.log("In1")
-  //     const users = JSON.parse(usersStrings);
-  //     setUserData(users);
-  //     accountService.postAllUsers();
-  //   }
-  //   // Respond to the `storage` event
-  //   function storageEventHandler(event) {
-  //     if (event.key === "users") {
-  //       console.log("In2")
-  //       const users = JSON.parse(event.newValue);
-  //       setUserData(users);
-  //     }
-  //   }
-  //   // Hook up the event handler
-  //   window.addEventListener("storage", storageEventHandler);
-  //   return () => {
-  //     // Remove the handler when the component unmounts
-  //     window.removeEventListener("storage", storageEventHandler);
-  //   };
-  // }, []);
 
   return (
     <div className={"App " + (user && ' bg-light')}>
@@ -55,7 +29,12 @@ function App() {
       <Routes>
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Home />} />
-          <Route path="/profile/*" element={<Profile />}/>
+          <Route path="/profile/*" element={<Profile />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/course" element={<Course />} />
+          <Route path="/exercise" element={<Exercise />} />
+          <Route path="/calculator" element={<Calculator />} />
+          <Route path="/vocabulary" element={<Vocabulary />} />
         </Route>
         <Route path="/account/*" element={<Account />} />
         <Route path="*" element={<div>Not Found!</div>} />

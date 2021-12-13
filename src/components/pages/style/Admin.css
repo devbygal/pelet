@@ -1,6 +1,6 @@
 /* admin */
 .table1 {
-    color: white;
+    color: white !important;
     background: rgb(61, 61, 60);
     height: 40px !important;
 }

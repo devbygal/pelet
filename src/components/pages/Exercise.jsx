@@ -1,17 +1,29 @@
 import Button from "react-bootstrap/Button";
 import React, { useEffect, useState } from "react";
-import { Container, ListGroup, Modal, Nav, Navbar,Offcanvas } from "react-bootstrap";
+import { Container, ListGroup, Modal, Nav, Navbar, Offcanvas } from "react-bootstrap";
 import "./style/Exercise.css";
 import Dropdown from "react-bootstrap/Dropdown";
+import {fillInputs,checkAnswers,addInputs} from "./FunctionsForPages";
 
 export const Exercise = () => {
   // תרגולים
   const [exercises, setExercises] = useState([]);
   const [currentExercise, setCurrentExercise] = useState(1);
-  const [input, setInput] = useState("");
-  const [topics] = useState(["תכונות","כותרות","פסקאות","סגנונות","עיצוב","הוספת גרשיים","הערות","סי אס אס","לינקים","תמונות","טבלאות","רשימות","קלאסים","זהות אישית","מסגרות","סקריפטים","קוד מחשב","טפסים","תכונות בטספים","אלמנטים בטפסים","סוגי קלטים","תכונות קלטים"]);
+  const [input1, setInput1] = useState("");
+  const [input2, setInput2] = useState("");
+  const [input3, setInput3] = useState("");
+  const [input4, setInput4] = useState("");
+  const [input5, setInput5] = useState("");
+  const [input6, setInput6] = useState("");
+  const [input7, setInput7] = useState("");
+  const [input8, setInput8] = useState("");
+  const [input9, setInput9] = useState("");
+  const [input10, setInput10] = useState("");
+
 
   
+  const [topics] = useState(["תכונות", "כותרות", "פסקאות", "סגנונות", "עיצוב", "הוספת גרשיים", "הערות", "סי אס אס", "לינקים", "תמונות", "טבלאות", "רשימות", "קלאסים", "זהות אישית", "מסגרות", "סקריפטים", "קוד מחשב", "טפסים", "תכונות בטספים", "אלמנטים בטפסים", "סוגי קלטים", "תכונות קלטים"]);
+
   // עיצוב משתנה
   const [styleEx, setStyleEx] = useState("Exercise");
   const [styleExText, setStyleExText] = useState("textEx");
@@ -27,24 +39,6 @@ export const Exercise = () => {
     setAnswerCheck(b);
     handleShow();
   };
-  function addInputs(st) {
-    let arr = [];
-    for (let index = 0; index < st.length; index++) {
-      let element = st[index];
-      if (element === "$")
-        arr.push(
-          <input
-            value={input}
-            type="text"
-            onChange={(e) => {
-              setInput(e.target.value);
-            }}
-          />
-        );
-      else arr.push(element);
-    }
-    return arr;
-  }
 
   useEffect(() => {
     getExercises();
@@ -77,7 +71,6 @@ export const Exercise = () => {
       });
   };
 
-  
   return (
     <div className="bodyEx">
       {/* חלונית בדיקת פתרון */}
@@ -115,17 +108,26 @@ export const Exercise = () => {
               <Nav className="justify-content-end flex-grow-1">
                 <ListGroup>
                   {/* לקיחת הנתונים לניווט מהשרת */}
-                  {topics.map((topic) => (
-                    <ListGroup.Item>
+                  {topics.map((topic, index) => (
+                    <ListGroup.Item key={index}>
                       {/* תרגיל {ex.exerciseCode} */}
                       <Dropdown>
                         <Dropdown.Toggle variant="success" id="dropdown-basic">
-                           {topic}
+                          {topic}
                         </Dropdown.Toggle>
-                        <Dropdown.Menu>  {exercises.map((ex) => (
-                            ex.exerciseTopic===topic?
-                          <Dropdown.Item onClick={()=>{setCurrentExercise(ex.exerciseCode)}} href="#/action-1" style={{textAlign:'center'}}>תרגיל {ex.exerciseCode}</Dropdown.Item>:null
-                        ))}
+                        <Dropdown.Menu>
+                          {exercises.filter((item) => item.exerciseTopic === topic).map((ex, index) =>
+                              <Dropdown.Item
+                                key={index}
+                                onClick={() => {
+                                  setCurrentExercise(ex.exerciseCode);
+                                }}
+                                href="#/action-1"
+                                style={{ textAlign: "center" }}
+                              >
+                                תרגיל {index+1}
+                              </Dropdown.Item>
+                          )}
                         </Dropdown.Menu>
                       </Dropdown>
                     </ListGroup.Item>
@@ -146,14 +148,14 @@ export const Exercise = () => {
                 <p>{ex.question}</p>
               </div>
               <div className={styleEx}>
-                <p style={{ paddingTop: "30px", fontSize: "19px" }}>{addInputs(ex.description)}</p>
+                <p style={{ paddingTop: "30px", fontSize: "19px" }}>{addInputs(ex.description,input1,input2,input3,input4,input5,input6,input7,input8,input9,input10,setInput1,setInput2,setInput3,setInput4,setInput5,setInput6,setInput7,setInput8,setInput9,setInput10)}</p>
               </div>
             </div>
             <div className={containerAnswers}>
               {/* בודק אם תשובת המשתמש זהה לתשובה במסד הנתונים */}
               <button
                 onClick={() => {
-                  input === ex.answer ? checkAnswer(true) : checkAnswer(false);
+                  checkAnswers(ex.answer,input1,input2,input3,input4,input5,input6,input7,input8,input9,input10) ? checkAnswer(true) : checkAnswer(false);
                 }}
                 className={btn1}
               >
@@ -162,7 +164,7 @@ export const Exercise = () => {
               </button>
               <button
                 onClick={() => {
-                  setInput(ex.answer);
+                  fillInputs(ex.answer,setInput1,setInput2,setInput3,setInput4,setInput5,setInput6,setInput7,setInput8,setInput9,setInput10);
                 }}
                 className={btn2}
               >

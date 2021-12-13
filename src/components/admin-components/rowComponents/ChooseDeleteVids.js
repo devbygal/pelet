@@ -1,17 +1,23 @@
 import Button from "@restart/ui/esm/Button";
 import * as FiIcon from "react-icons/fi";
 import React, { useEffect, useState } from "react";
+import "./../admin-styles/chooseDelete.css";
 
-export default function ChooseDelete(data) {
-  
+export default function ChooseDeleteVids(data) {
   const [modal, setModal] = useState(false);
-  const [users, setUsers] = useState([]);
-
- 
-
+  const [videos, setVideos] = useState([]);
+  
   useEffect(() => {
-    getUsers();
-  }, [users]);
+    getVideos();
+  }, [videos]);
+
+  // useEffect(() => {
+  //   effect
+  //   return () => {
+  //     cleanup
+  //   }
+  // }, [input])
+  
   const toggleModal = () => {
     setModal(!modal);
   };
@@ -23,8 +29,8 @@ export default function ChooseDelete(data) {
   }
 
 
-  const getUsers = async () => {
-    await fetch("http://proj7.ruppin-tech.co.il/api/accounts", {
+  const getVideos = async () => {
+    await fetch("http://proj7.ruppin-tech.co.il/api/Lessons", {
       method: "GET",
       headers: {
         Accept: "application/json; charset=UTF-8",
@@ -37,7 +43,7 @@ export default function ChooseDelete(data) {
       })
       .then((result) => {
         if (result) {
-          setUsers(result);
+            setVideos(result);
           //   console.log("works");
         } else {
           //   console.log("error");
@@ -45,20 +51,20 @@ export default function ChooseDelete(data) {
       });
   };
 
-  function deleteUser() {
-    console.log(data.id)
-    fetch(`http://proj7.ruppin-tech.co.il/api/accounts/${data.id}`, {
+  function deleteVideo() {
+     console.log(data.id+"code of lesson")
+    fetch(`http://proj7.ruppin-tech.co.il/api/Lessons/${data.id}`, {
       method: 'DELETE'
     }).then((result) => {
       result.json().then((resp) => {
-        console.warn(resp)
-        getUsers()
+        // console.warn(resp)
+        getVideos()
       })
     })
   }
-  function deleteU(){
+  function deleteV(){
  
-    deleteUser()
+    deleteVideo()
     toggleModal()
   }
   return (
@@ -71,9 +77,9 @@ export default function ChooseDelete(data) {
         <div className="modal1">
           <div onClick={toggleModal} className="overlay1"></div>
           <div className="modal-content1">
-              <FiIcon.FiX className="close-modal1" onClick={toggleModal}/>
-            <p style={{paddingRight:'20px'}}>בטוח שתרצה למחוק?</p>
-            <Button class="btn btn-primary mr-2 btnWdt" onClick={()=>{ deleteU()}}>כן</Button>
+          <FiIcon.FiX className="close-modal1" onClick={toggleModal}/>
+            <p>בטוח שתרצה למחוק?</p>
+            <Button class="btn btn-primary mr-2 btnWdt" onClick={()=>{ deleteV()}}>כן</Button>
             <br />
             <Button class="btn btn-danger" onClick={toggleModal}>לא</Button>
           </div>

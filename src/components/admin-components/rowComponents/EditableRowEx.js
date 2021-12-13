@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 
 export const EditableRowEx = ({
   editFormData,
-  handleEditFormChange,
   handleCancelClick,
 }) => {
     const [exercises, setExercises] = useState([]);

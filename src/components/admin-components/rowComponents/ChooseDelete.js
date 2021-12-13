@@ -1,14 +1,17 @@
 import Button from "@restart/ui/esm/Button";
 import * as FiIcon from "react-icons/fi";
 import React, { useEffect, useState } from "react";
-import "./admin-styles/chooseDelete.css";
 
-export default function ChooseDeleteVids(data) {
+export default function ChooseDelete(data) {
+  
   const [modal, setModal] = useState(false);
-  const [videos, setVideos] = useState([]);
+  const [users, setUsers] = useState([]);
+
+ 
+
   useEffect(() => {
-    getVideos();
-  }, [videos]);
+    getUsers();
+  }, [users]);
   const toggleModal = () => {
     setModal(!modal);
   };
@@ -20,8 +23,8 @@ export default function ChooseDeleteVids(data) {
   }
 
 
-  const getVideos = async () => {
-    await fetch("http://proj7.ruppin-tech.co.il/api/Lessons", {
+  const getUsers = async () => {
+    await fetch("http://proj7.ruppin-tech.co.il/api/accounts", {
       method: "GET",
       headers: {
         Accept: "application/json; charset=UTF-8",
@@ -34,28 +37,27 @@ export default function ChooseDeleteVids(data) {
       })
       .then((result) => {
         if (result) {
-            setVideos(result);
-          //   console.log("works");
+          setUsers(result);
         } else {
-          //   console.log("error");
+          console.log("error");
         }
       });
   };
 
-  function deleteVideo() {
-     console.log(data.id+"code of lesson")
-    fetch(`http://proj7.ruppin-tech.co.il/api/Lessons/${data.id}`, {
+  function deleteUser() {
+    console.log(data.id)
+    fetch(`http://proj7.ruppin-tech.co.il/api/accounts/${data.id}`, {
       method: 'DELETE'
     }).then((result) => {
       result.json().then((resp) => {
-        // console.warn(resp)
-        getVideos()
+        console.warn(resp)
+        getUsers()
       })
     })
   }
-  function deleteV(){
+  function deleteU(){
  
-    deleteVideo()
+    deleteUser()
     toggleModal()
   }
   return (
@@ -68,11 +70,9 @@ export default function ChooseDeleteVids(data) {
         <div className="modal1">
           <div onClick={toggleModal} className="overlay1"></div>
           <div className="modal-content1">
-            <button className="close-modal1" onClick={toggleModal}>
-              <FiIcon.FiX />
-            </button>
-            <p>בטוח שתרצה למחוק?</p>
-            <Button class="btn btn-primary mr-2 btnWdt" onClick={()=>{ deleteV()}}>כן</Button>
+          <FiIcon.FiX className="close-modal1" onClick={toggleModal}/>
+            <p style={{paddingRight:'20px'}}>בטוח שתרצה למחוק?</p>
+            <Button class="btn btn-primary mr-2 btnWdt" onClick={()=>{ deleteU()}}>כן</Button>
             <br />
             <Button class="btn btn-danger" onClick={toggleModal}>לא</Button>
           </div>

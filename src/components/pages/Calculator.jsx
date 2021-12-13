@@ -19,7 +19,7 @@ export const Calculator = (props) => {
     setResult(result.slice(0, -1));
   }
   const calculate = () => {
-    setResult(eval(result).toString());
+    setResult( window.Function("return " + result)())
   }
   const aski = () => {
     setResult(result.charCodeAt(0))

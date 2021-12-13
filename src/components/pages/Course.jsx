@@ -15,7 +15,7 @@ export const Course = () => {
 
   useEffect(() => {
     getVideos();
-  }, [videos, style]);
+  }, [videos]);
 
   //  פונקציה לבחירת שיעור לצפייה
   const selectVid = (v, i, e) => {

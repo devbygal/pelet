@@ -16,12 +16,10 @@ const getWords=async()=>{
         'Content-type': 'application/json'
     },
    }).then(response=>{
-        console.log('res.status', response.status);
         return response.json()
    }).then(result=>{
        if(result){
         setWords(result);
-           console.log('works')
        }
        else{
            console.log('error')
@@ -33,7 +31,7 @@ const getWords=async()=>{
         <>
     <div>
       {words.map((item, index) => (
-        <div className="tile">
+        <div className="tile" key={index}>
     {` ${item.word} - ${item.translation} `}
         </div>
       ))}

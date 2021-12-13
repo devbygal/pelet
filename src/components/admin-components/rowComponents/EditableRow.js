@@ -31,15 +31,13 @@ export const EditableRow = ({
       },
     })
       .then((response) => {
-        // console.log("res.status", response.status);
         return response.json();
       })
       .then((result) => {
         if (result) {
           setUsers(result);
-          //   console.log("works");
         } else {
-          //   console.log("error");
+          console.log("error");
         }
       });
   };
@@ -58,7 +56,7 @@ export const EditableRow = ({
         "lastName": lastName,
         "email": email,
         "gender": gender,
-        "acceptTerms": true,
+        "acceptTerms": acceptTerms,
         "password": password
     }),
     }).then((result) => {
