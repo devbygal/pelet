@@ -66,8 +66,8 @@ export const Admin = () => {
 
 //  ייבוא מידע נחוץ מהשרת
 // ייבוא משתמשים
-  const getUsers = async () => {
-    await fetch("http://proj7.ruppin-tech.co.il/api/accounts", {
+  const getUsers = () => {
+    fetch("http://proj7.ruppin-tech.co.il/api/accounts", {
       method: "GET",
       headers: {
         Accept: "application/json; charset=UTF-8",
@@ -76,7 +76,7 @@ export const Admin = () => {
     })
       .then((response) => {
         console.log(response)
-        return response.json();
+        //return response.json();
       })
       .then((result) => {
         if (result) {
@@ -206,8 +206,8 @@ export const Admin = () => {
              <div className="py-4">
                <h2 style={{ direction: "rtl" }}> סרטונים - {lang===10?"Html+Css":"JS"}</h2>
                <form>
-                 <table table class="table border shadow table1">
-                   <thead class="thead-dark">
+                 <table table className="table border shadow table1">
+                   <thead className="thead-dark">
                      <tr>
                        <th scope="col">קוד שפה</th>
                        <th scope="col">קוד שיעור</th>
@@ -262,8 +262,8 @@ export const Admin = () => {
              <div className="py-4">
                <h2 style={{ direction: "rtl" }}> תרגילים - {lang===10?"Html+Css":"JS"}</h2>
                <form>
-                 <table table class="table border shadow table1">
-                   <thead class="thead-dark">
+                 <table table className="table border shadow table1">
+                   <thead className="thead-dark">
                      <tr>
                        <th scope="col">קוד תרגיל</th>
                        <th scope="col">קוד שפת לימוד</th>

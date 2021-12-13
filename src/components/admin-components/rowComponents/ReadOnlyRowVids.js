@@ -14,7 +14,7 @@ const ReadOnlyRowVids = ({ contact, handleEditClick }) => {
 
       <td>
         <Button
-          class="btn btn-primary mr-2 btnWdt"
+          className="btn btn-primary mr-2 btnWdt"
           onClick={(event) => handleEditClick(event, contact)}
         >
           ערוך

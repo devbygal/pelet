@@ -19,8 +19,8 @@ export const accountService = {
     create,
     update,
     delete: _delete,
-    postAllUsers,
-    deleteAllUsers,
+    postUser,
+    updateUser,
     user: userSubject.asObservable(),
     get userValue () { return userSubject.value }
 };
@@ -109,13 +109,13 @@ function _delete(id) {
         });
 }
 
-function postAllUsers(users) {
-  return fetchWrapper.post(`${baseUrl}/postAllUsers`, users );
+function postUser(params) {
+  return fetchWrapper.post(`${baseUrl}/users`, params );
 }
 
-function deleteAllUsers() {
-    return fetchWrapper.delete(`${baseUrl}/deleteAllUsers`);
-  }
+function updateUser(id) {
+    return fetchWrapper.post(`${baseUrl}/${id}`);
+}
 
 // helper functions
 

@@ -1,5 +1,5 @@
 import { Role } from './'
-import { alertService } from '../_services';
+import { accountService, alertService } from '../_services';
 
 // array in local storage for registered users
 const usersKey = 'users';
@@ -114,18 +114,7 @@ export function configureBackend() {
                 const user = body();
     
                 if (users.find(x => x.email === user.email)) {
-                    // display email already registered "email" in alert
-                    setTimeout(() => {
-                        alertService.info(`
-                            <h4>Email Already Registered</h4>
-                            <p>Your email ${user.email} is already registered.</p>
-                            <p>If you don't know your password please visit the <a href="http://localhost:3000/account/forgot-password">forgot password</a> page.</p>
-                            <div><strong>NOTE:</strong> The fake backend displayed this "email" so you can test without an api. A real backend would send a real email.</div>
-                        `, { autoClose: false });
-                    }, 1000);
-
-                    // always return ok() response to prevent email enumeration
-                    return ok();
+                    return error(`This email ${user.email} is already exists.`);
                 }
     
                 // assign user id and a few other properties then save
@@ -155,6 +144,7 @@ export function configureBackend() {
                     `, { autoClose: false });
                 }, 1000);
 
+                accountService.postUser(user);
                 return ok();
             }
     
@@ -267,15 +257,15 @@ export function configureBackend() {
             }
     
             function updateUser() {
-                if (!isAuthenticated()) return unauthorized();
+                if (isAuthenticated()) return unauthorized();
     
                 let params = body();
                 let user = users.find(x => x.id === idFromUrl());
 
-                // users can update own profile and admins can update all profiles
-                if (user.id !== currentUser().id && !isAuthorized(Role.Admin)) {
-                    return unauthorized();
-                }
+                // // users can update own profile and admins can update all profiles
+                // if (user.id !== currentUser().id && !isAuthorized(Role.Admin)) {
+                //     return unauthorized();
+                // }
 
                 // only update password if included
                 if (!params.password) {

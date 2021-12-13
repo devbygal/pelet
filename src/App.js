@@ -37,7 +37,6 @@ function App() {
           <Route path="/calculator" element={<Calculator />} />
           <Route path="/vocabulary" element={<Vocabulary />} />
           <Route path="/addContent" element={<Add />} />
-
         </Route>
         <Route path="/account/*" element={<Account />} />
         <Route path="*" element={<div>Not Found!</div>} />

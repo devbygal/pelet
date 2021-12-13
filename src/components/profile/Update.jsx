@@ -17,22 +17,32 @@ function Update() {
 
     const validationSchema = Yup.object().shape({
         firstName: Yup.string()
-            .required('First Name is required'),
+            .matches(/^[a-z\u0590-\u05fe]+$/i, "שם פרטי חייב להכיל רק תווים.")
+            .required('נדרש שם פרטי.'),
         lastName: Yup.string()
-            .required('Last Name is required'),
+            .matches(/^[a-z\u0590-\u05fe]+$/i, "שם משפחה חייב להכיל רק תווים.")
+            .required('נדרש שם משפחה.'),
         email: Yup.string()
-            .email('Email is invalid')
-            .required('Email is required'),
+            .matches(
+                /[a-zA-Z0-9]{0,}([.]?[a-zA-Z0-9]{1,})[@](gmail.com|hotmail.com|yahoo.com|walla.com|walla.co.il)/,
+                "דואר אלקטרוני חייב יכול מורכב מתכונות הדואר הבאות: hotmail.com | gmail.com | yahoo.com | walla.com | walla.co.il .",
+            )
+            .email('דוא"ל לא תקין.')
+            .required('יש צורך בדוא"ל.'),
         password: Yup.string()
-            .min(6, 'Password must be at least 6 characters'),
+            .matches(
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/,
+                "סיסמה חייבת להכיל 8 תווים לפחות, אות אחת גדולה, אות קטנה אחת, מספר אחד ותו אות מיוחד אחד."
+            )
+            .required('דרוש סיסמא.'),
     });
 
     function onSubmit(fields, { setStatus, setSubmitting }) {
         setStatus();
         accountService.update(user.id, fields)
             .then(() => {
-                alertService.success('Update successful', { keepAfterRouteChange: true });
-                navigate('-1');
+                alertService.success('עודכן בהצלחה.', { keepAfterRouteChange: true });
+                navigate(-1);
             })
             .catch(error => {
                 setSubmitting(false);
@@ -91,7 +101,7 @@ function Update() {
                                 : <span>מחק</span>
                             }
                         </button>
-                        <Link to="." className="btn btn-link">ביטול</Link>
+                        <Link to="/profile/details" className="btn btn-link">ביטול</Link>
                     </div>
                 </Form>
             )}

@@ -8,7 +8,6 @@ export const Nav = () => {
     const [user, setUser] = useState({});
 
     useEffect(() => {
-        console.log(user.roleUser)
         const subscription = accountService.user.subscribe(x => setUser(x));
         return subscription.unsubscribe;
     }, []);
@@ -28,13 +27,13 @@ export const Nav = () => {
                         מחשבון
                     </Link>
                     {user.roleUser === Role.Admin &&
-                        <Link to="admin" className="nav-item nav-link">מנהל</Link>
+                        <Link to="/admin" className="nav-item nav-link">מנהל</Link>
                     }
                     <Link to="#" onClick={accountService.logout} className="nav-item nav-link">התנתק</Link>
                 </div>
             </nav>
             <Routes>
-            <Route path="admin" element={AdminNav} />
+            <Route path="/admin" element={AdminNav} />
             </Routes>
         </div>
     );

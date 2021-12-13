@@ -18,15 +18,17 @@ export const Register = () => {
 
   const validationSchema = Yup.object().shape({
     firstName: Yup.string()
+      .matches(/^[a-z\u0590-\u05fe]+$/i, "שם פרטי חייב להכיל רק תווים.")
       .required('נדרש שם פרטי.'),
     lastName: Yup.string()
+      .matches(/^[a-z\u0590-\u05fe]+$/i, "שם משפחה חייב להכיל רק תווים.")
       .required('נדרש שם משפחה.'),
     username: Yup.string()
       .required('נדרש שם משתמש.'),
     email: Yup.string()
       .matches(
-        /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
-        "סיסמה חייבת להכיל 8 תווים לפחות, אות אחת גדולה, אות קטנה אחת, מספר אחד ותו אות מיוחד אחד."
+        /[a-zA-Z0-9]{0,}([.]?[a-zA-Z0-9]{1,})[@](gmail.com|hotmail.com|yahoo.com|walla.com|walla.co.il)/,
+        "דואר אלקטרוני חייב יכול מורכב מתכונות הדואר הבאות: hotmail.com | gmail.com | yahoo.com | walla.com | walla.co.il .",
       )
       .email('דוא"ל לא תקין.')
       .required('יש צורך בדוא"ל.'),
