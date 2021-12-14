@@ -3,13 +3,18 @@ import * as FiIcon from "react-icons/fi";
 import React, { useEffect, useState } from "react";
 import "./../admin-styles/chooseDelete.css";
 
-export default function ChooseDeleteVids(data) {
+export const  ChooseDeleteVids=(data)=> {
   const [modal, setModal] = useState(false);
   const [videos, setVideos] = useState([]);
   
   useEffect(() => {
     getVideos();
-  }, [videos]);
+
+    return () => {
+      console.log("clean-upVids")
+      getVideos();
+    };
+  }, [])
 
   // useEffect(() => {
   //   effect
@@ -69,7 +74,7 @@ export default function ChooseDeleteVids(data) {
   }
   return (
     <>
-      <Button class="btn btn-danger" onClick={toggleModal}>
+      <Button className="btn btn-danger" onClick={toggleModal}>
         מחק
       </Button>
 
@@ -79,9 +84,9 @@ export default function ChooseDeleteVids(data) {
           <div className="modal-content1">
           <FiIcon.FiX className="close-modal1" onClick={toggleModal}/>
             <p>בטוח שתרצה למחוק?</p>
-            <Button class="btn btn-primary mr-2 btnWdt" onClick={()=>{ deleteV()}}>כן</Button>
+            <Button className="btn btn-primary mr-2 btnWdt" onClick={()=>{ deleteV()}}>כן</Button>
             <br />
-            <Button class="btn btn-danger" onClick={toggleModal}>לא</Button>
+            <Button className="btn btn-danger" onClick={toggleModal}>לא</Button>
           </div>
         </div>
       )}

@@ -21,6 +21,7 @@ export const accountService = {
     delete: _delete,
     postUser,
     updateUser,
+    deleteUser,
     user: userSubject.asObservable(),
     get userValue () { return userSubject.value }
 };
@@ -113,8 +114,12 @@ function postUser(params) {
   return fetchWrapper.post(`${baseUrl}/users`, params );
 }
 
-function updateUser(id) {
-    return fetchWrapper.post(`${baseUrl}/${id}`);
+function updateUser(id, params) {
+    return fetchWrapper.put(`${baseUrl}/users/${id}`, params);
+}
+
+function deleteUser(id) {
+    return fetchWrapper.delete(`${baseUrl}/users/${id}`);
 }
 
 // helper functions

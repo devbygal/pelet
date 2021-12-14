@@ -1,6 +1,6 @@
 import Button from "@restart/ui/esm/Button";
 import React from "react";
-import ChooseDeleteEx from "./ChooseDeleteEx";
+import {ChooseDeleteEx} from "./ChooseDeleteEx";
 
 export const ReadOnlyRowEx = ({ contact, handleEditClick }) => {
  
@@ -15,7 +15,7 @@ export const ReadOnlyRowEx = ({ contact, handleEditClick }) => {
       <td style={{width:'100px',overflow:'hidden'}}>{contact.description}</td>
       <td style={{width:'100px'}}>
         <Button
-          class="btn btn-primary mr-2 btnWdt"
+          className="btn btn-primary mr-2 btnWdt"
           onClick={(event) => handleEditClick(event, contact)}
         >
           ערוך
@@ -25,6 +25,5 @@ export const ReadOnlyRowEx = ({ contact, handleEditClick }) => {
     </tr>
   );
 };
-export default ReadOnlyRowEx;
 
 

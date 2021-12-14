@@ -22,6 +22,7 @@ export const Nav = () => {
                     <Link to="/" className="nav-item nav-link">ראשי</Link>
                     <Link to="profile/details" className="nav-item nav-link">פרופיל</Link>
                     <Link to="vocabulary" className="nav-item nav-link">אוצר מילים</Link>
+                    <Link to="/exercise" className="nav-item nav-link">תרגולים </Link>
                     <Link to="/calculator" className="nav-item nav-link"
                         onClick={() => { window.open('/calculator', 'mywin', 'width=288,height=600') }}>
                         מחשבון
@@ -32,21 +33,13 @@ export const Nav = () => {
                     <Link to="#" onClick={accountService.logout} className="nav-item nav-link">התנתק</Link>
                 </div>
             </nav>
-            <Routes>
-            <Route path="/admin" element={AdminNav} />
-            </Routes>
+            {user.roleUser === Role.Admin &&
+                <nav className="admin-nav navbar navbar-expand navbar-light">
+                    <div className="navbar-nav">
+                        <Link to="/admin/users" className="nav-item nav-link">משתמשים</Link>
+                    </div>
+                </nav>
+            }
         </div>
-    );
-}
-
-function AdminNav({ match }) {
-    const { path } = match;
-
-    return (
-        <nav className="admin-nav navbar navbar-expand navbar-light">
-            <div className="navbar-nav">
-                <Link to={`${path}/users`} className="nav-item nav-link">משתמשים</Link>
-            </div>
-        </nav>
     );
 }

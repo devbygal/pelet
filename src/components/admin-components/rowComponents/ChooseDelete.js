@@ -2,7 +2,7 @@ import Button from "@restart/ui/esm/Button";
 import * as FiIcon from "react-icons/fi";
 import React, { useEffect, useState } from "react";
 
-export default function ChooseDelete(data) {
+export const ChooseDelete=(data)=> {
   
   const [modal, setModal] = useState(false);
   const [users, setUsers] = useState([]);
@@ -11,7 +11,12 @@ export default function ChooseDelete(data) {
 
   useEffect(() => {
     getUsers();
-  }, [users]);
+    return()=>{
+      console.log('cleanedUsers')
+      getUsers();
+    }
+  }, []);
+
   const toggleModal = () => {
     setModal(!modal);
   };
@@ -62,22 +67,23 @@ export default function ChooseDelete(data) {
   }
   return (
     <>
-      <Button class="btn btn-danger" onClick={toggleModal}>
+      <Button className="btn btn-danger" onClick={toggleModal}>
         מחק
       </Button>
 
-      {modal && (
+      <>{modal && (
         <div className="modal1">
           <div onClick={toggleModal} className="overlay1"></div>
           <div className="modal-content1">
           <FiIcon.FiX className="close-modal1" onClick={toggleModal}/>
             <p style={{paddingRight:'20px'}}>בטוח שתרצה למחוק?</p>
-            <Button class="btn btn-primary mr-2 btnWdt" onClick={()=>{ deleteU()}}>כן</Button>
+            <Button className="btn btn-primary mr-2 btnWdt" onClick={()=>{ deleteU()}}>כן</Button>
             <br />
-            <Button class="btn btn-danger" onClick={toggleModal}>לא</Button>
+            <Button className="btn btn-danger" onClick={toggleModal}>לא</Button>
           </div>
         </div>
       )}
+      </>
     </>
   );
 }

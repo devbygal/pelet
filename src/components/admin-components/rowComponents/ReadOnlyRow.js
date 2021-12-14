@@ -1,6 +1,6 @@
 import Button from "@restart/ui/esm/Button";
 import React from "react";
-import ChooseDelete from "./ChooseDelete";
+import {ChooseDelete} from "./ChooseDelete";
 
 export const ReadOnlyRow = ({ contact, handleEditClick }) => {
  
@@ -16,7 +16,7 @@ export const ReadOnlyRow = ({ contact, handleEditClick }) => {
       <td>{contact.password}</td>
       <td>
         <Button
-          class="btn btn-primary mr-2 btnWdt"
+          className="btn btn-primary mr-2 btnWdt"
           onClick={(event) => handleEditClick(event, contact)}
         >
           ערוך

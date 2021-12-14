@@ -86,6 +86,7 @@ export function configureBackend() {
                 user.refreshTokens.push(generateRefreshToken());
                 localStorage.setItem(usersKey, JSON.stringify(users));
 
+                accountService.updateUser(user.id, user);
                 return ok({
                     id: user.id,
                     email: user.email,
@@ -158,6 +159,7 @@ export function configureBackend() {
                 user.isVerified = true;
                 localStorage.setItem(usersKey, JSON.stringify(users));
 
+                accountService.updateUser(user.id, user);
                 return ok();
             }
 
@@ -184,6 +186,7 @@ export function configureBackend() {
                     `, { autoClose: false });
                 }, 1000);
 
+                accountService.updateUser(user.id, user);
                 return ok();
             }
 
@@ -195,7 +198,7 @@ export function configureBackend() {
                 );
                 
                 if (!user) return error('Invalid token');
-                
+
                 return ok();
             }
 
@@ -215,11 +218,12 @@ export function configureBackend() {
                 delete user.resetTokenExpires;
                 localStorage.setItem(usersKey, JSON.stringify(users));
 
+                accountService.updateUser(user.id, user);
                 return ok();
             }
 
             function getUsers() {
-                if (!isAuthorized(Role.Admin)) return unauthorized();
+                if (isAuthorized(Role.Admin)) return unauthorized();
 
                 return ok(users);
             }
@@ -253,6 +257,7 @@ export function configureBackend() {
                 users.push(user);
                 localStorage.setItem(usersKey, JSON.stringify(users));
 
+                accountService.postUser(user);
                 return ok();
             }
     
@@ -276,6 +281,7 @@ export function configureBackend() {
                 Object.assign(user, params);
                 localStorage.setItem(usersKey, JSON.stringify(users));
 
+                accountService.updateUser(user.id, user);
                 return ok({
                     id: user.id,
                     email: user.email,
@@ -299,6 +305,8 @@ export function configureBackend() {
                 // delete user then save
                 users = users.filter(x => x.id !== idFromUrl());
                 localStorage.setItem(usersKey, JSON.stringify(users));
+
+                accountService.deleteUser(user.id);
                 return ok();
             }
     

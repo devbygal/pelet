@@ -135,6 +135,7 @@ export const addInputs = (st, input1, input2, input3, input4, input5, input6, in
             i++;
             switch (i) {
                 case 1: arr.push (<input value={input1}
+                    key={i}
                     type="text"
                     onChange={
                         (e) => {

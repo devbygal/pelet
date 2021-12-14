@@ -1,9 +1,9 @@
 import Button from "@restart/ui/esm/Button";
 import React from "react";
-import ChooseDeleteVids from "./ChooseDeleteVids";
+import {ChooseDeleteVids} from "./ChooseDeleteVids";
 import './../admin-styles/readOnly.css'
 
-const ReadOnlyRowVids = ({ contact, handleEditClick }) => {
+export const ReadOnlyRowVids = ({ contact, handleEditClick }) => {
   
   return (
     <tr>
@@ -25,4 +25,3 @@ const ReadOnlyRowVids = ({ contact, handleEditClick }) => {
   );
 };
 
-export default ReadOnlyRowVids;

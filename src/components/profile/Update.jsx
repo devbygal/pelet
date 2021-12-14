@@ -6,7 +6,6 @@ import * as Yup from 'yup';
 import { accountService, alertService } from '../_services';
 
 function Update() {
-    let navigate = useNavigate();
     const user = accountService.userValue;
     const initialValues = {
         firstName: user.firstName,
@@ -14,6 +13,8 @@ function Update() {
         email: user.email,
         password: '',
     };
+    
+    let navigate = useNavigate();
 
     const validationSchema = Yup.object().shape({
         firstName: Yup.string()
@@ -34,7 +35,7 @@ function Update() {
                 /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/,
                 "סיסמה חייבת להכיל 8 תווים לפחות, אות אחת גדולה, אות קטנה אחת, מספר אחד ותו אות מיוחד אחד."
             )
-            .required('דרוש סיסמא.'),
+            // .required('דרוש סיסמא.'),
     });
 
     function onSubmit(fields, { setStatus, setSubmitting }) {

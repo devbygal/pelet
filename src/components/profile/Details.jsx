@@ -5,7 +5,6 @@ import { accountService } from '../_services';
 
 export const Details = () => {
     const user = accountService.userValue;
-
     return (
         <div>
             <h1>My Profile</h1>

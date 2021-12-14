@@ -4,8 +4,8 @@ import { Route, Routes } from 'react-router';
 import { accountService } from './components/_services';
 import { Role } from './components/_helpers';
 
-import { Account } from './components/account/Index';
 import { Alert, Nav, PrivateRoute } from './components/_utils';
+import { Account } from './components/account/Index';
 import { Home } from './components/pages/Home';
 import { Profile } from './components/profile/Index';
 import { Admin } from './components/pages/Admin';
@@ -31,7 +31,7 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Home />} />
           <Route path="/profile/*" element={<Profile />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin" roles={[Role.Admin]} element={<Admin />}/>
           <Route path="/course" element={<Course />} />
           <Route path="/exercise" element={<Exercise />} />
           <Route path="/calculator" element={<Calculator />} />

@@ -1,5 +1,7 @@
 
-
+.list-group-item {
+    padding: 0 !important;
+}
 .textExBarOpen{
     margin-right: 400px;
 }

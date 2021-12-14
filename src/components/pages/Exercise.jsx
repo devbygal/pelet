@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Container, ListGroup, Modal, Nav, Navbar, Offcanvas } from "react-bootstrap";
 import "./style/Exercise.css";
 import Dropdown from "react-bootstrap/Dropdown";
-import {fillInputs,checkAnswers,addInputs} from "./FunctionsForPages";
+import {fillInputs,checkAnswers,addInputs} from "./functions/FunctionsForPages";
 
 export const Exercise = () => {
   // תרגולים
@@ -40,9 +40,19 @@ export const Exercise = () => {
     handleShow();
   };
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   getExercises();
+  // }, [exercises]);
+  
+  useEffect(()=>{
     getExercises();
-  }, [exercises]);
+
+    return () => {
+        console.log("clean-upEX")
+        
+      };
+ },[])
+
   // שינוי עיצוב בעת פתיחת תפריט צד
   const chngeStyleEx = (s1, s2, s3, s4, s5) => {
     setStyleEx(s1);
@@ -87,7 +97,7 @@ export const Exercise = () => {
       </Modal>
 
       {/* בוטסראפ ניווט צד */}
-      <Navbar style={{ background: "#04AA6D" }} expand={false}>
+      <Navbar style={{ background: "#04AA6D" ,direction:'rtl'}} expand={false}>
         <Container fluid>
           <Navbar.Toggle
             onClick={() => {
@@ -139,9 +149,9 @@ export const Exercise = () => {
         </Container>
       </Navbar>
       {/* הצגת התרגול עצמו */}
-      {exercises.map((ex) =>
-        ex.exerciseCode === currentExercise ? (
-          <div>
+      {exercises.filter((item) => item.exerciseCode === currentExercise).map((ex,index) =>
+       
+          <div key={index}>
             <div className="mainExercise">
               <div className={styleExText}>
                 <h1>תרגיל:</h1>
@@ -174,7 +184,7 @@ export const Exercise = () => {
               <p title="par"></p>
             </div>
           </div>
-        ) : null
+        
       )}
     </div>
   );

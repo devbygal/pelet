@@ -5,7 +5,6 @@ import { Details } from './Details';
 import { Update } from './Update';
 
 export const Profile = () => {
-
     return (
         <div className="p-4">
             <div className="container">

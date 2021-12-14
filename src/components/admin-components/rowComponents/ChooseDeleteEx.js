@@ -3,14 +3,20 @@ import * as FiIcon from "react-icons/fi";
 import React, { useEffect, useState } from "react";
 
 
-export default function ChooseDeleteEx(data) {
+export const ChooseDeleteEx=(data)=>{
   
   const [modal, setModal] = useState(false);
   const [exercises, setExercises] = useState([]);
 
   useEffect(() => {
     getExercises();
-  }, [exercises]);
+
+    return () => {
+      console.log("clean-upVids")
+      getExercises();
+    };
+  }, [])
+
   const toggleModal = () => {
     setModal(!modal);
   };
@@ -62,7 +68,7 @@ export default function ChooseDeleteEx(data) {
   }
   return (
     <>
-      <Button class="btn btn-danger" onClick={toggleModal}>
+      <Button className="btn btn-danger" onClick={toggleModal}>
         מחק
       </Button>
 
@@ -72,7 +78,7 @@ export default function ChooseDeleteEx(data) {
           <div className="modal-content1">
               <FiIcon.FiX className="close-modal1" onClick={toggleModal}/>
             <p style={{paddingRight:'20px'}}>בטוח שתרצה למחוק?</p>
-            <Button class="btn btn-primary mr-2 btnWdt" onClick={()=>{ deleteEx()}}>כן</Button>
+            <Button className="btn btn-primary mr-2 btnWdt" onClick={()=>{ deleteEx()}}>כן</Button>
             <br />
             <Button class="btn btn-danger" onClick={toggleModal}>לא</Button>
           </div>
