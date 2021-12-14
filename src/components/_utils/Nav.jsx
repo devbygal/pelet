@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Button } from 'react-bootstrap';
 import { Link, Route, Routes } from 'react-router-dom';
 
 import { Role } from '../_helpers';
@@ -23,23 +24,16 @@ export const Nav = () => {
                     <Link to="profile/details" className="nav-item nav-link">פרופיל</Link>
                     <Link to="vocabulary" className="nav-item nav-link">אוצר מילים</Link>
                     <Link to="/exercise" className="nav-item nav-link">תרגולים </Link>
-                    <Link to="/calculator" className="nav-item nav-link"
-                        onClick={() => { window.open('/calculator', 'mywin', 'width=288,height=600') }}>
+                    <Button 
+                        onClick={() => { window.open('/calculator', '_blank', 'width=270,height=510') }}>
                         מחשבון
-                    </Link>
+                    </Button>
                     {user.roleUser === Role.Admin &&
                         <Link to="/admin" className="nav-item nav-link">מנהל</Link>
                     }
                     <Link to="#" onClick={accountService.logout} className="nav-item nav-link">התנתק</Link>
                 </div>
             </nav>
-            {user.roleUser === Role.Admin &&
-                <nav className="admin-nav navbar navbar-expand navbar-light">
-                    <div className="navbar-nav">
-                        <Link to="/admin/users" className="nav-item nav-link">משתמשים</Link>
-                    </div>
-                </nav>
-            }
         </div>
     );
 }

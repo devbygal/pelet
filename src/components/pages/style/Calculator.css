@@ -1,5 +1,7 @@
 /* מחשבון */
 
+/* body{ overflow-x:hidden;overflow-y:hidden; }
+body {  min-width:270px;min-height: 510px; } */
 .keypad{
     direction: ltr;
     display: grid;

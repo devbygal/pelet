@@ -148,6 +148,14 @@ export const Admin = () => {
 
   // השמת הנתונים בטבלאות עם פילטר לחיפוש בדף
   return (
+    <>
+    
+    <nav className="admin-nav navbar navbar-expand navbar-dark bg-primary">
+        <div className="navbar-nav">
+          <Link to="/admin/users" className="nav-item nav-link">משתמשים</Link>
+        </div>
+      </nav>
+
     <div className="scroller">
       <div style={{ display: 'flex', background: 'brown', color: 'beige' }}>
         <Link style={{ color: 'beige' }} to="/admin">  <FiIcon.FiEdit style={{ width: '50px', height: '20px', marginRight: '40px' }} /> </Link>
@@ -329,5 +337,6 @@ export const Admin = () => {
       ))}
       {/* <CreateInserts/> */}
     </div>
+    </>
   );
 };

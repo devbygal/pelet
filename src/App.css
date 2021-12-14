@@ -14,11 +14,22 @@ a {
 }
 
 .admin-nav {
+  height: 40px;
   padding-top: 0;
   padding-bottom: 0;
   background-color: #e8e9ea;
   border-bottom: 1px solid #ccc;
 }
+
+.admin-nav > .navbar-nav > a {
+  opacity: 0.8;
+  color: #ffffff !important;
+}
+
+.admin-nav > .navbar-nav > a:hover {
+  opacity: 1;
+}
+
 
 .close-times {
   font-size: 18px;
@@ -28,3 +39,4 @@ a {
 .close-times:hover {
   opacity: 1;
 }
+
