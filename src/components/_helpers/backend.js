@@ -126,7 +126,7 @@ export function configureBackend() {
                 }
                 user.dateCreated = new Date().toISOString();
                 user.verificationToken = new Date().getTime().toString();
-                user.isVerified = false;
+                user.isVerified = true;
                 user.refreshTokens = [];
                 users.push(user);
                 localStorage.setItem(usersKey, JSON.stringify(users));
@@ -149,14 +149,13 @@ export function configureBackend() {
             function verifyEmail() {
                 const { token } = body();
                 const user = users.find(x => !!x.verificationToken && x.verificationToken === token);
-                
+
                 if (!user) return error('האימות נכשל.');
                 
                 // set is verified flag to true if token is valid
                 user.isVerified = true;
                 localStorage.setItem(usersKey, JSON.stringify(users));
 
-                accountService.updateUser(user.id, user);
                 return ok();
             }
 

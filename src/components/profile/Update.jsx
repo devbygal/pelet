@@ -58,26 +58,26 @@ function Update() {
                     <h1>Update Profile</h1>
                     <div className="form-row">
                         <div className="form-group col-5">
-                            <label>First Name</label>
+                            <label>שם פרטי</label>
                             <Field name="firstName" type="text" className={'form-control' + (errors.firstName && touched.firstName ? ' is-invalid' : '')} />
                             <ErrorMessage name="firstName" component="div" className="invalid-feedback" />
                         </div>
                         <div className="form-group col-5">
-                            <label>Last Name</label>
+                            <label>שם משפחה</label>
                             <Field name="lastName" type="text" className={'form-control' + (errors.lastName && touched.lastName ? ' is-invalid' : '')} />
                             <ErrorMessage name="lastName" component="div" className="invalid-feedback" />
                         </div>
                     </div>
                     <div className="form-group">
-                        <label>Email</label>
+                        <label>דואר אלקטרוני</label>
                         <Field name="email" type="text" className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')} />
                         <ErrorMessage name="email" component="div" className="invalid-feedback" />
                     </div>
-                    <h3 className="pt-3">Change Password</h3>
-                    <p>Leave blank to keep the same password</p>
+                    <h3 className="pt-3">שנה סיסמא</h3>
+                    <p>השאר ריק כדי לשמור את אותה סיסמה</p>
                     <div className="form-row">
                         <div className="form-group col">
-                            <label>Password</label>
+                            <label>סיסמה</label>
                             <Field name="password" type="password" className={'form-control' + (errors.password && touched.password ? ' is-invalid' : '')} />
                             <ErrorMessage name="password" component="div" className="invalid-feedback" />
                         </div>
