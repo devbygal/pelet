@@ -85,7 +85,6 @@ export function configureBackend() {
                 user.refreshTokens.push(generateRefreshToken());
                 localStorage.setItem(usersKey, JSON.stringify(users));
 
-                accountService.updateUser(user.id, user);
                 return ok({
                     id: user.id,
                     email: user.email,
@@ -181,7 +180,6 @@ export function configureBackend() {
                     `, { autoClose: false });
                 }, 1000);
 
-                accountService.updateUser(user.id, user);
                 return ok();
             }
 
