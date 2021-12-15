@@ -1,0 +1,67 @@
+
+
+
+
+/* EDITOR */
+.top-pane {
+    background-color: hsl(225, 6%, 25%) !important;
+    direction: ltr;
+  }
+  code, kbd, pre, samp {
+    font-family: var(--bs-font-monospace);
+    font-size: 1em;
+    direction: ltr;
+    unicode-bidi: normal !important;
+}
+  .pane {
+    height: 50vh !important;
+    display: flex !important;
+  }
+  
+  .editor-container {
+    flex-grow: 1 !important;
+    flex-basis: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    padding: .5rem !important;
+    background-color: hsl(225, 6%, 25%) !important;
+  }
+  
+  .editor-container.collapsed {
+    flex-grow: 0 !important;
+  }
+  
+  .editor-container.collapsed .CodeMirror-scroll {
+    position: absolute !important;
+    overflow: hidden !important;
+  }
+  
+  .expand-collapse-btn {
+    margin-left: .5rem !important;
+    background: none !important;
+    border: none !important;
+    color: white !important;
+    cursor: pointer !important;
+  }
+  
+  .editor-title {
+    display: flex !important;
+    justify-content: space-between !important;
+    background-color: hsl(225, 6%, 13%) !important;
+    color: white !important;
+    padding: .5rem .5rem .5rem 1rem !important;
+    border-top-right-radius: .5rem !important;
+    border-top-left-radius: .5rem !important;
+  }
+  
+  /* .CodeMirror {
+    height: 100% !important;
+  }
+   */
+  .code-mirror-wrapper {
+    flex-grow: 1 !important;
+    border-bottom-right-radius: .5rem !important;
+    border-bottom-left-radius: .5rem !important;
+    overflow: hidden;
+  }
+

@@ -9,7 +9,7 @@ export const ReadOnlyRowEx = ({ contact, handleEditClick }) => {
     <tr>
       <td style={{width:'100px'}}>{contact.exerciseCode}</td>
       <td style={{width:'100px'}}>{contact.studyLanguageCode}</td>
-      <td style={{width:'100px'}}>{contact.lessonCode}</td>
+      <td style={{width:'100px'}}>{contact.exerciseTopic}</td>
       <td style={{width:'100px'}}>{contact.question}</td>
       <td style={{width:'100px'}}>{contact.answer}</td>
       <td style={{width:'100px',overflow:'hidden'}}>{contact.description}</td>

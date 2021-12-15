@@ -31,10 +31,10 @@ export function configureBackend() {
                         return validateResetToken();
                     case url.endsWith('/accounts/reset-password') && method === 'POST':
                         return resetPassword();
-                    case url.endsWith('/accounts') && method === 'GET':
-                        return getUsers();
-                    case url.match(/\/accounts\/\d+$/) && method === 'GET':
-                        return getUserById();
+                    // case url.endsWith('/accounts') && method === 'GET':
+                    //     return getUsers();
+                    // case url.match(/\/accounts\/\d+$/) && method === 'GET':
+                    //     return getUserById();
                     case url.endsWith('/accounts') && method === 'POST':
                         return createUser();
                     case url.match(/\/accounts\/\d+$/) && method === 'PUT':
@@ -55,7 +55,7 @@ export function configureBackend() {
                 const { email, password } = body();
                 const user = users.find(x => x.email === email && x.password === password && x.isVerified);
 
-                if (!user) return error('Email or password is incorrect');
+                if (!user) return error('הדוא"ל או הסיסמה שגויים.');
 
                 // add refresh token to user
                 user.refreshTokens.push(generateRefreshToken());
@@ -64,7 +64,6 @@ export function configureBackend() {
                 return ok({
                     id: user.id,
                     email: user.email,
-                    title: user.title,
                     firstName: user.firstName,
                     lastName: user.lastName,
                     roleUser: user.roleUser,
@@ -90,7 +89,6 @@ export function configureBackend() {
                 return ok({
                     id: user.id,
                     email: user.email,
-                    title: user.title,
                     firstName: user.firstName,
                     lastName: user.lastName,
                     roleUser: user.roleUser,
@@ -115,7 +113,7 @@ export function configureBackend() {
                 const user = body();
     
                 if (users.find(x => x.email === user.email)) {
-                    return error(`This email ${user.email} is already exists.`);
+                    return error(`הדוא"ל הזה $ {user.email} כבר קיים.`);
                 }
     
                 // assign user id and a few other properties then save
@@ -137,11 +135,10 @@ export function configureBackend() {
                 setTimeout(() => {
                     const verifyUrl = `http://localhost:3000/account/verify-email?token=${user.verificationToken}`;
                     alertService.info(`
-                        <h4>Verification Email</h4>
-                        <p>Thanks for registering!</p>
-                        <p>Please click the below link to verify your email address:</p>
-                        <p><a href="${verifyUrl}">${verifyUrl}</a></p>
-                        <div><strong>NOTE:</strong> The fake backend displayed this "email" so you can test without an api. A real backend would send a real email.</div>
+                    <h4>אימייל אימות</h4>
+                    <p>תודה על ההרשמה!</p>
+                    <p>אנא לחץ על הקישור שלהלן כדי לאמת את כתובת הדוא"ל שלך:</p>
+                    <p><a href="${verifyUrl}">${verifyUrl}</a></p>
                     `, { autoClose: false });
                 }, 1000);
 
@@ -153,7 +150,7 @@ export function configureBackend() {
                 const { token } = body();
                 const user = users.find(x => !!x.verificationToken && x.verificationToken === token);
                 
-                if (!user) return error('Verification failed');
+                if (!user) return error('האימות נכשל.');
                 
                 // set is verified flag to true if token is valid
                 user.isVerified = true;
@@ -179,10 +176,9 @@ export function configureBackend() {
                 setTimeout(() => {
                     const resetUrl = `http://localhost:3000/account/reset-password?token=${user.resetToken}`;
                     alertService.info(`
-                        <h4>Reset Password Email</h4>
-                        <p>Please click the below link to reset your password, the link will be valid for 1 day:</p>
-                        <p><a href="${resetUrl}">${resetUrl}</a></p>
-                        <div><strong>NOTE:</strong> The fake backend displayed this "email" so you can test without an api. A real backend would send a real email.</div>
+                    <h4>איפוס סיסמה</h4>
+                    <p>אנא לחץ על הקישור למטה כדי לאפס את הסיסמה שלך, הקישור יהיה תקף ליום אחד:</p>
+                    <p><a href="${resetUrl}">${resetUrl}</a></p>
                     `, { autoClose: false });
                 }, 1000);
 
@@ -197,7 +193,7 @@ export function configureBackend() {
                     new Date() < new Date(x.resetTokenExpires)
                 );
                 
-                if (!user) return error('Invalid token');
+                if (!user) return error('אסימון לא חוקי.');
 
                 return ok();
             }
@@ -209,7 +205,7 @@ export function configureBackend() {
                     new Date() < new Date(x.resetTokenExpires)
                 );
                 
-                if (!user) return error('Invalid token');
+                if (!user) return error('אסימון לא חוקי.');
                 
                 // update password and remove reset token
                 user.password = password;
@@ -242,16 +238,17 @@ export function configureBackend() {
             }
     
             function createUser() {
-                if (!isAuthorized(Role.Admin)) return unauthorized();
-    
+                if (isAuthorized(Role.Admin)) return unauthorized();
+
                 const user = body();
                 if (users.find(x => x.email === user.email)) {
-                    return error(`Email ${user.email} is already registered`);
+                    return error(`הדוא"ל ${user.email} כבר רשום`);
                 }
 
                 // assign user id and a few other properties then save
                 user.id = newUserId();
                 user.dateCreated = new Date().toISOString();
+                user.verificationToken = new Date().getTime().toString();
                 user.isVerified = true;
                 user.refreshTokens = [];
                 users.push(user);
@@ -285,7 +282,6 @@ export function configureBackend() {
                 return ok({
                     id: user.id,
                     email: user.email,
-                    title: user.title,
                     firstName: user.firstName,
                     lastName: user.lastName,
                     roleUser: user.roleUser
@@ -317,7 +313,7 @@ export function configureBackend() {
             }
 
             function unauthorized() {
-                resolve({ status: 401, text: () => Promise.resolve(JSON.stringify({ message: 'Unauthorized' })) });
+                resolve({ status: 401, text: () => Promise.resolve(JSON.stringify({ message: 'לא מורשה.' })) });
             }
 
             function error(message) {

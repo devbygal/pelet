@@ -1,7 +1,7 @@
 // main.js
 
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev')
 
@@ -37,6 +37,36 @@ function createWindow() {
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 }
+
+  // Create the browser window.
+  
+  ipcMain.on('calc-window:toggle', () => {
+    const calcWindow = new BrowserWindow({
+
+      maxWidth: 260,
+      maxHeight: 480,
+
+      width: 260,
+      height: 480,
+  
+      minWidth: 260,
+      minHeight: 480,
+  
+      autoHideMenuBar: true,
+      center: true,
+      frame: true,
+      resizable: false,
+  
+      webPreferences: {
+          nodeIntegration: true,
+          contextIsolation: false,
+          devTools: true, // Accessing devtools resources(Ctrl + Shift + i)
+          webSecurity: true,
+          preload: path.join(__dirname, 'preload.js')
+      }
+    })
+    calcWindow.loadURL("http://localhost:3000/calculator")
+  })
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

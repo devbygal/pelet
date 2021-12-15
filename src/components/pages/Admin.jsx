@@ -33,16 +33,7 @@ export const Admin = () => {
     };
   }, [])
 
-  //    useEffect(()=>{
-  //     getUsers();
-
-  //     return () => {
-  //         console.log("clean-up")
-  //         getUsers();
-  //       };
-  //  },[users])
-
-
+  // ייבוא משתמשים
   useEffect(() => {
     exerciseService.getAllExercises().then((values) => {
       setExercises(values)
@@ -57,17 +48,11 @@ export const Admin = () => {
   // פונקציות ללחצנים
   const [searchTerm, setSearchTerm] = useState("");
 
-  // const handleCancelClick = () => {
-  //   setEditContactId(null);
-  // };
+
   const handleCancelClick2 = () => {
     setEditVideoId(null);
   };
-  // const handleEditClick = (event, contact) => {
-  //   console.log(contact.id)
-  //   event.preventDefault();
-  //   setEditContactId(contact.id);
-  // };
+
   const handleEditClick2 = (event, video) => {
     console.log(video.lessonCode)
     event.preventDefault();
@@ -83,27 +68,7 @@ export const Admin = () => {
   };
 
   //  ייבוא מידע נחוץ מהשרת
-  // ייבוא משתמשים
-  // const getUsers = async () => {
-  //   await fetch("http://proj7.ruppin-tech.co.il/api/accounts", {
-  //     method: "GET",
-  //     headers: {
-  //       Accept: "application/json; charset=UTF-8",
-  //       "Content-type": "application/json",
-  //     },
-  //   })
-  //     .then((response) => {
-  //       console.log(response)
-  //       return response.json();
-  //     })
-  //     .then((result) => {
-  //       if (result) {
-  //         setUsers(result);
-  //       } else {
-  //         console.log("error");
-  //       }
-  //     });
-  // };
+
   // ייבוא שיעורים
   const getVideos = async () => {
     await fetch("http://proj7.ruppin-tech.co.il/api/Lessons", {

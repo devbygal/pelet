@@ -74,7 +74,7 @@ function resetPassword({ token, password }) {
 }
 
 function getAll() {
-    return fetchWrapper.get(baseUrl);
+    return fetchWrapper.get(`${baseUrl}`);
 }
 
 function getById(id) {

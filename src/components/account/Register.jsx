@@ -11,7 +11,6 @@ export const Register = () => {
   const initialValues = {
     firstName: '',
     lastName: '',
-    username: '',
     email: '',
     password: ''
   };
@@ -23,8 +22,6 @@ export const Register = () => {
     lastName: Yup.string()
       .matches(/^[a-z\u0590-\u05fe]+$/i, "שם משפחה חייב להכיל רק תווים.")
       .required('נדרש שם משפחה.'),
-    username: Yup.string()
-      .required('נדרש שם משתמש.'),
     email: Yup.string()
       .matches(
         /[a-zA-Z0-9]{0,}([.]?[a-zA-Z0-9]{1,})[@](gmail.com|hotmail.com|yahoo.com|walla.com|walla.co.il)/,
@@ -69,10 +66,6 @@ export const Register = () => {
                 <Field name="lastName" type="text" placeholder="שם משפחה" className={'form-control' + (errors.lastName && touched.lastName ? ' is-invalid' : '')} />
                 <ErrorMessage name="lastName" component="div" className="invalid-feedback" />
               </div>
-            </div>
-            <div className="form-group mb-3">
-              <Field name="username" type="text" placeholder="שם משתמש" className={'form-control' + (errors.username && touched.username ? ' is-invalid' : '')} />
-              <ErrorMessage name="username" component="div" className="invalid-feedback" />
             </div>
             <div className="form-group mb-3">
               <Field name="email" type="text" placeholder="דוא&quot;ל" className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')} />

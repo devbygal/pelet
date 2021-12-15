@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./style/Calculator.css";
 
-export const Calculator = (props) => {
+export const Calculator = () => {
   const [result, setResult] = useState("")
   // const [text, setText] = useState("")
 

@@ -1,14 +1,15 @@
 import Button from "react-bootstrap/Button";
 import React, { useEffect, useState } from "react";
+import { exerciseService } from "../../_services/exercise.service";
 
 export const EditableRowEx = ({
   editFormData,
   handleCancelClick,
 }) => {
-    const [exercises, setExercises] = useState([]);
-    const [exerciseCode, setExerciseCode] = useState(editFormData.exerciseCode);
+  const [exercises, setExercises] = useState([]);
+  const [exerciseCode, setExerciseCode] = useState(editFormData.exerciseCode);
   const [lang, setLang] = useState(editFormData.studyLanguageCode);
-  const [lessonCode, setLessonCode] = useState(editFormData.lessonCode);
+  const [exerciseTopic, setExerciseTopic] = useState(editFormData.exerciseTopic);
   const [question, setQuestion] = useState(editFormData.question);
   const [answer, setAnswer] = useState(editFormData.answer);
   const [description, setDescription] = useState(editFormData.description);
@@ -41,27 +42,17 @@ export const EditableRowEx = ({
   };
 
   function updateUser() {
-    fetch(`http://proj7.ruppin-tech.co.il/api/Exercises/${editFormData.exerciseCode}`, {
-      method: "PUT",
-      headers: {
-        'Accept': 'application/json; charset=UTF-8',
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify(   {
-        "exerciseCode": exerciseCode,
-        "studyLanguageCode": lang,
-        "lessonCode": lessonCode,
-        "question": question,
-        "answer": answer,
-        "description": description,
-    
-    }),
-    }).then((result) => {
-      result.json().then((resp) => {
-        console.warn(resp);
-        getExercises();
-      });
-    });
+    const body =({
+          "exerciseCode": exerciseCode,
+          "studyLanguageCode": lang,
+          "exerciseTopic": exerciseTopic,
+          "answer": answer,
+          "description": description})
+    exerciseService.updateExercise(editFormData.exerciseCode,body).then(()=>{
+      console.log('good')
+    }).catch(error => {
+      console.log('dam')
+  });
   }
   return (
     <tr>
@@ -92,9 +83,9 @@ export const EditableRowEx = ({
           className="editInput"
           type="text"
           required="required"
-          defaultValue={editFormData.lessonCode}
+          defaultValue={editFormData.exerciseTopic}
           onChange={(e) => {
-            setLessonCode(e.target.value);
+            setExerciseTopic(e.target.value);
           }}
         ></input>
       </td>

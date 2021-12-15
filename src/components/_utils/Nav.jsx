@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
-import { Link, Route, Routes } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Role } from '../_helpers';
 import { accountService } from '../_services';
+
+const { ipcRenderer } = window.require('electron');
 
 export const Nav = () => {
     const [user, setUser] = useState({});
@@ -20,20 +21,33 @@ export const Nav = () => {
         <div>
             <nav className="navbar navbar-expand navbar-dark bg-dark">
                 <div className="navbar-nav">
-                    <Link to="/" className="nav-item nav-link">ראשי</Link>
-                    <Link to="profile/details" className="nav-item nav-link">פרופיל</Link>
-                    <Link to="vocabulary" className="nav-item nav-link">אוצר מילים</Link>
-                    <Link to="/exercise" className="nav-item nav-link">תרגולים </Link>
-                    <Button 
-                        onClick={() => { window.open('/calculator', '_blank', 'width=270,height=510') }}>
-                        מחשבון
-                    </Button>
-                    {user.roleUser === Role.Admin &&
-                        <Link to="/admin" className="nav-item nav-link">מנהל</Link>
-                    }
-                    <Link to="#" onClick={accountService.logout} className="nav-item nav-link">התנתק</Link>
+                    <ul className="nav justify-content-center">
+                        <li className="nav-item">
+                        <Link to="/" className="nav-item nav-link">ראשי</Link>
+                        </li>
+                        <li>
+                            <Link to="simulation" className="nav-item nav-link">סימולציה</Link>
+                        </li>
+                        <li className="nav-item">
+                        <Link to="/exercise" className="nav-item nav-link">תרגולים </Link>
+                        </li>
+                        <li className="nav-item">
+                        <Link to="vocabulary" className="nav-item nav-link">אוצר מילים</Link>
+                        </li>
+                        <li className="nav-item">
+                        <   Link to="#" id="toggle-calc-window" className="nav-item nav-link" onClick={() => ipcRenderer.send('calc-window:toggle')}>מחשבון</Link>
+                        </li>
+                        {user.roleUser === Role.Admin &&
+                            <>
+                                <li><Link to="/admin" className="nav-item nav-link">מנהל</Link></li>
+                                <li><Link to="/admin/overview" className="nav-item nav-link">מנהל שני</Link></li>
+                            </>
+                        }
+                        <Link to="profile/details" className="nav-item nav-link">פרופיל</Link>
+                        <Link to="#" onClick={accountService.logout} className="nav-item nav-link">התנתק</Link>
+                    </ul>
                 </div>
-            </nav>
+            </nav> 
         </div>
     );
 }
