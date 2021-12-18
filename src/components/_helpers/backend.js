@@ -123,7 +123,7 @@ export async function configureBackend() {
                 // } else {
                 //     user.roleUser = Role.User;
                 // }
-                user.roleUser = Role.Admin;
+                user.roleUser = Role.User;
                 user.dateCreated = new Date().toISOString();
                 user.verificationToken = new Date().getTime().toString();
                 user.isVerified = true;
