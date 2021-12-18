@@ -13,6 +13,7 @@ export const Details = () => {
                 <strong>דואר אלקטרוני: </strong> {user.email}
             </p>
             <p><Link to="/profile/update">עדכון פרופיל</Link></p>
+            <p><Link to="#" onClick={accountService.logout} className="nav-item nav-link">התנתק</Link></p>
         </div>
     );
 }

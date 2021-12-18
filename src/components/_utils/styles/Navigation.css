@@ -1,0 +1,144 @@
+.navigation {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: #202020;
+    height: 100vh;
+    width: 300px;
+    border-left: 1px solid #343B4B;
+    overflow: auto;
+    transition: width 0.5s, right 0.5%;
+}
+
+.navigation.active {
+    width: 0;
+}
+
+.navigation.notLogged {
+    width: 0;
+}
+
+.navBottom {
+    display: flex;
+    flex-direction: column;
+}
+
+.navigation .navBottom .adminNav {
+    color: #ffffff !important;
+}
+
+.navTop {
+    display: flex;
+    flex-direction: column;
+    position: -webkit-sticky;
+    /* safari */
+    position: sticky;
+    top: 0;
+    background: #202020;
+    z-index: 9;
+}
+
+.navTop input::placeholder {
+    font-size: 14px;
+}
+
+.navigation .navTop a {
+    color: #ffffff !important;
+}
+
+.navLink {
+    color: inherit;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    height: 2.25rem;
+    padding: 0.5rem;
+    margin: 2px 1rem;
+    border-radius: 0.33rem;
+}
+
+.navigation a img {
+    margin: 0 0.5rem;
+}
+
+.navigation a svg {
+    font-size: 18px;
+    margin: 0 0.5rem;
+}
+
+.navLink:hover,
+.navLink.active {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.033);
+}
+
+.navLink:after {
+    content: "";
+    height: 2rem;
+    width: 3px;
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+    /* 8px padding + 2px margin */
+    border-radius: 1.5px;
+    background: #4cc2ff;
+    transform: translateY(-110%);
+}
+
+.navLink.active::after {
+    transform: translateY(0);
+    height: 1rem;
+    transition: transform 0.13s, height 0.2s 0.13s;
+}
+
+.adminNav {
+    background-color: #007bff;
+    transition: background-color .5s, color .5s;
+}
+
+.adminNav:hover,
+.adminNav:active {
+    color: #ffffff;
+    background-color: #007bff;
+}
+
+.account {
+    display: flex;
+    align-items: center;
+    height: auto;
+    margin-top: 1rem;
+}
+
+.account::after,
+.account.active::after {
+    transform: translateY(1000%);
+}
+
+.search {
+    height: 2rem;
+    border: 0;
+    border-bottom: 1px solid #4cc2ff;
+    border-radius: 0.33rem;
+    padding: 0.5rem;
+    margin: 1rem;
+}
+
+.search {
+    background: rgba(255, 255, 255, 0.033);
+}
+
+.search:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.search:focus {
+    border-bottom: 2px solid #4cc2ff;
+}
+
+.search::placeholder {
+    color: rgba(255, 255, 255, 0.66);
+}
+
+.search:focus-visible {
+    outline: none;
+}

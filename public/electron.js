@@ -11,7 +11,7 @@ function createWindow() {
 
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    
+
     width: 1366,
     height: 768,
 
@@ -20,53 +20,72 @@ function createWindow() {
 
     autoHideMenuBar: true,
     center: true,
-    frame: true,
+    frame: false,
 
     webPreferences: {
-        nodeIntegration: true,
-        contextIsolation: false,
-        devTools: true, // Accessing devtools resources(Ctrl + Shift + i)
-        webSecurity: true,
-        preload: path.join(__dirname, 'preload.js')
+      nodeIntegration: true,
+      contextIsolation: false,
+      devTools: true, // Accessing devtools resources(Ctrl + Shift + i)
+      webSecurity: true,
+      preload: path.join(__dirname, 'preload.js')
     }
   })
 
   // and load the index.html of the app.
   mainWindow.loadURL(isDev ? "http://localhost:3000" : `file://${path.join(__dirname, "../build/index.html")}`)
 
+  // Close App
+  ipcMain.on('close-app', () => {
+    mainWindow.close();
+  })
+
+  // Minimize App
+  ipcMain.on('minimize-app', () => {
+    mainWindow.minimize();
+  })
+
+  // Maximize App
+  ipcMain.on('maximize-app', () => {
+    if (mainWindow.isMaximized()) {
+      mainWindow.restore();
+    } else {
+      mainWindow.maximize();
+    }
+  })
+
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 }
 
-  // Create the browser window.
-  
-  ipcMain.on('calc-window:toggle', () => {
-    const calcWindow = new BrowserWindow({
+// Create the browser window.
 
-      maxWidth: 260,
-      maxHeight: 480,
+ipcMain.on('calc-window:toggle', () => {
+  const calcWindow = new BrowserWindow({
 
-      width: 260,
-      height: 480,
-  
-      minWidth: 260,
-      minHeight: 480,
-  
-      autoHideMenuBar: true,
-      center: true,
-      frame: true,
-      resizable: false,
-  
-      webPreferences: {
-          nodeIntegration: true,
-          contextIsolation: false,
-          devTools: true, // Accessing devtools resources(Ctrl + Shift + i)
-          webSecurity: true,
-          preload: path.join(__dirname, 'preload.js')
-      }
-    })
-    calcWindow.loadURL("http://localhost:3000/calculator")
+    maxWidth: 260,
+    maxHeight: 480,
+
+    width: 260,
+    height: 480,
+
+    minWidth: 260,
+    minHeight: 480,
+
+    autoHideMenuBar: true,
+    center: true,
+    frame: true,
+    resizable: false,
+
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+      devTools: true, // Accessing devtools resources(Ctrl + Shift + i)
+      webSecurity: true,
+      preload: path.join(__dirname, 'preload.js')
+    }
   })
+  calcWindow.loadURL("http://localhost:3000/calculator")
+})
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

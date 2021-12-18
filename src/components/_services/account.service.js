@@ -26,8 +26,8 @@ export const accountService = {
     get userValue () { return userSubject.value }
 };
 
-function login(email, password) {
-    return fetchWrapper.post(`${baseUrl}/authenticate`, { email, password })
+async function login(email, password) {
+    return await fetchWrapper.post(`${baseUrl}/authenticate`, { email, password })
         .then(user => {
             // publish user to subscribers and start timer to refresh token
             userSubject.next(user);
@@ -36,15 +36,15 @@ function login(email, password) {
         });
 }
 
-function logout() {
+async function logout() {
     // revoke token, stop refresh timer, publish null to user subscribers and redirect to login page
-    fetchWrapper.post(`${baseUrl}/revoke-token`, {});
+    await fetchWrapper.post(`${baseUrl}/revoke-token`, {});
     stopRefreshTokenTimer();
     userSubject.next(0);
 }
 
-function refreshToken() {
-    return fetchWrapper.post(`${baseUrl}/refresh-token`, {})
+async function refreshToken() {
+    return await fetchWrapper.post(`${baseUrl}/refresh-token`, {})
         .then(user => {
             // publish user to subscribers and start timer to refresh token
             userSubject.next(user);
@@ -53,40 +53,40 @@ function refreshToken() {
         });
 }
 
-function register(params) {
-  return fetchWrapper.post(`${baseUrl}/register`, params);
+async function register(params) {
+    return await fetchWrapper.post(`${baseUrl}/register`, params);
 }
 
-function verifyEmail(token) {
-    return fetchWrapper.post(`${baseUrl}/verify-email`, { token });
+async function verifyEmail(token) {
+    return await fetchWrapper.post(`${baseUrl}/verify-email`, { token });
 }
 
-function forgotPassword(email) {
-    return fetchWrapper.post(`${baseUrl}/forgot-password`, { email });
+async function forgotPassword(email) {
+    return await fetchWrapper.post(`${baseUrl}/forgot-password`, { email });
 }
 
-function validateResetToken(token) {
-    return fetchWrapper.post(`${baseUrl}/validate-reset-token`, { token });
+async function validateResetToken(token) {
+    return await fetchWrapper.post(`${baseUrl}/validate-reset-token`, { token });
 }
 
-function resetPassword({ token, password }) {
-    return fetchWrapper.post(`${baseUrl}/reset-password`, { token, password });
+async function resetPassword({ token, password }) {
+    return await fetchWrapper.post(`${baseUrl}/reset-password`, { token, password });
 }
 
-function getAll() {
-    return fetchWrapper.get(`${baseUrl}`);
+async function getAll() {
+    return await fetchWrapper.get(`${baseUrl}`);
 }
 
-function getById(id) {
-    return fetchWrapper.get(`${baseUrl}/${id}`);
+async function getById(id) {
+    return await fetchWrapper.get(`${baseUrl}/${id}`);
 }
 
-function create(params) {
-    return fetchWrapper.post(baseUrl, params);
+async function create(params) {
+    return await fetchWrapper.post(baseUrl, params);
 }
 
-function update(id, params) {
-    return fetchWrapper.put(`${baseUrl}/${id}`, params)
+async function update(id, params) {
+    return await fetchWrapper.put(`${baseUrl}/${id}`, params)
         .then(user => {
             // update stored user if the logged in user updated their own record
             if (user.id === userSubject.value.id) {
@@ -99,8 +99,8 @@ function update(id, params) {
 }
 
 // prefixed with underscore because 'delete' is a reserved word in javascript
-function _delete(id) {
-    return fetchWrapper.delete(`http://localhost:3000/api/accounts/${id}`)
+async function _delete(id) {
+    return await fetchWrapper.delete(`http://localhost:3000/api/accounts/${id}`)
         .then(x => {
             // auto logout if the logged in user deleted their own record
             if (id === userSubject.value.id) {
@@ -110,16 +110,16 @@ function _delete(id) {
         });
 }
 
-function postUser(params) {
-  return fetchWrapper.post(`${baseUrl}/users`, params );
+async function postUser(params) {
+    return await fetchWrapper.post(`${baseUrl}/users`, params );
 }
 
-function updateUser(id, params) {
-    return fetchWrapper.put(`${baseUrl}/users/${id}`, params);
+async function updateUser(id, params) {
+    return await fetchWrapper.put(`${baseUrl}/users/${id}`, params);
 }
 
-function deleteUser(id) {
-    return fetchWrapper.delete(`${baseUrl}/users/${id}`);
+async function deleteUser(id) {
+    return await fetchWrapper.delete(`${baseUrl}/users/${id}`);
 }
 
 // helper functions

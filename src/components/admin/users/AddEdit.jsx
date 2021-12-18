@@ -86,7 +86,7 @@ export const AddEdit = () => {
                 fields.forEach(field => formikRef.current.setFieldValue(field, user[field], false));
             });
         }
-    }, []);
+    }, [id, isAddMode]);
 
     return (
 

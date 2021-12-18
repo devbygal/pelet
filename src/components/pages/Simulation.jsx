@@ -1,7 +1,8 @@
+import '../simulator/styles/Editor.css';
 import React, { useState, useEffect } from 'react';
-import Editor from '../../components/simulator/Editor'
-import useLocalStorage from '../../components/hooks/useLocalStorage.js '
-import '../simulator/editor.css'
+import Editor from '../../components/simulator/Editor';
+import useLocalStorage from '../../components/hooks/useLocalStorage.js';
+
 export const Simulation=()=> {
   const [html, setHtml] = useLocalStorage('html', '')
   const [css, setCss] = useLocalStorage('css', '')

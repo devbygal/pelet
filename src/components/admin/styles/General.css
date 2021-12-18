@@ -1,0 +1,30 @@
+.admin-nav {
+    height: 40px;
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: #e8e9ea;
+    border-bottom: 1px solid #ccc;
+}
+
+.admin-nav>.navbar-nav>a {
+    opacity: 0.8;
+    color: #ffffff !important;
+}
+
+.admin-nav>.navbar-nav>a:hover {
+    opacity: 1;
+}
+
+.thead-users {
+    color: #ccc !important;
+}
+
+.thead-users>tr>th {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.tbody-users>tr>td {
+    font-size: 14px;
+    font-weight: 300;
+}

@@ -5,7 +5,7 @@ import { accountService, alertService } from '../_services';
 const usersKey = 'users';
 let users = JSON.parse(localStorage.getItem(usersKey)) || [];
 
-export function configureBackend() {
+export async function configureBackend() {
     let realFetch = window.fetch;
     window.fetch = function (url, opts) {
         if (opts === undefined) { return; }
@@ -108,7 +108,7 @@ export function configureBackend() {
                 return ok();
             }
 
-            function register() {
+            async function register() {
                 const user = body();
     
                 if (users.find(x => x.email === user.email)) {
@@ -116,13 +116,14 @@ export function configureBackend() {
                 }
     
                 // assign user id and a few other properties then save
-                user.id = newUserId();
-                if (user.id === 1) {
-                    // first registered user is an admin
-                    user.roleUser = Role.Admin;
-                } else {
-                    user.roleUser = Role.User;
-                }
+                user.id = await newUserId();
+                // if (user.id === 1) {
+                //     // first registered user is an admin
+                //     user.roleUser = Role.Admin;
+                // } else {
+                //     user.roleUser = Role.User;
+                // }
+                user.roleUser = Role.User;
                 user.dateCreated = new Date().toISOString();
                 user.verificationToken = new Date().getTime().toString();
                 user.isVerified = true;
@@ -234,7 +235,7 @@ export function configureBackend() {
                 return ok(user);
             }
     
-            function createUser() {
+            async function createUser() {
                 if (isAuthorized(Role.Admin)) return unauthorized();
 
                 const user = body();
@@ -243,7 +244,7 @@ export function configureBackend() {
                 }
 
                 // assign user id and a few other properties then save
-                user.id = newUserId();
+                user.id = await newUserId();
                 user.dateCreated = new Date().toISOString();
                 user.verificationToken = new Date().getTime().toString();
                 user.isVerified = true;
@@ -336,8 +337,13 @@ export function configureBackend() {
                 return opts.body && JSON.parse(opts.body);    
             }
 
-            function newUserId() {
-                return users.length ? Math.max(...users.map(x => x.id)) + 1 : 1;
+            async function newUserId() {
+                let id = await accountService.getAll()
+                    .then(data => {
+                        return data.length ? Math.max(...data.map(x => x.id)) + 1 : 1;
+                    });
+                return id
+                // return users.length ? Math.max(...users.map(x => x.id)) + 1 : 1;
             }
 
             function generateJwtToken(user) {
