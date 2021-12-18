@@ -15,7 +15,7 @@ export const List = () => {
             if (x.id === id) { x.isDeleting = true; }
             return x;
         }));
-        accountService.delete(id).then(() => {
+        accountService.deleteUser(id).then(() => {
             setUsers(users => users.filter(x => x.id !== id));
         });
     }

@@ -1,59 +1,53 @@
-/* מחשבון */
-
-/* body{ overflow-x:hidden;overflow-y:hidden; }
-body {  min-width:270px;min-height: 510px; } */
-.keypad{
+.keypad {
     direction: ltr;
     display: grid;
-    grid-template-columns: repeat(4,1fr);
-    grid-auto-rows: minmax(60px,auto);
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(60px, auto);
     border: 1px solid black;
 }
-.CalcContainer{
-    top:50%;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%,-50%);
-    margin: 0 auto;
+
+.CalcContainer {
+    transform: translate(-50%, -50%);
     width: 256px;
     text-align: center;
     border: 10px solid black;
     background: black;
     border-radius: 5px;
-
+    position: fixed !important;
+    margin-left: 1000px;
+    top: 214px !important;
+    right: -130px !important;
 }
-.btnCalc{
+
+.btnCalc {
     border: 1px solid black;
- color: white;
+    color: white;
     background: #262834;
     border-radius: 5px;
     margin: 5px;
-    
 }
-#clear{
+
+#clear {
     grid-column: 1/3;
 }
-.highlight
-{
-background: #56cbdb;
-border: 1px solid black;
-color: white;
- 
-   border-radius: 5px;
-   margin: 5px;
-}
-.programming
-{
-background: #cf8a22;
-border: 1px solid black;
-color: white;
 
- 
-   border-radius: 5px;
-   margin: 5px;
+.highlight {
+    background: #56cbdb;
+    border: 1px solid black;
+    color: white;
+    border-radius: 5px;
+    margin: 5px;
 }
 
-.CalcContainer .header{
+.programming {
+    background: #cf8a22;
+    border: 1px solid black;
+    color: white;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.CalcContainer .header {
     font-size: x-large;
     color: aliceblue;
 }

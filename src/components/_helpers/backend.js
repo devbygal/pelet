@@ -123,7 +123,7 @@ export async function configureBackend() {
                 // } else {
                 //     user.roleUser = Role.User;
                 // }
-                user.roleUser = Role.User;
+                user.roleUser = Role.Admin;
                 user.dateCreated = new Date().toISOString();
                 user.verificationToken = new Date().getTime().toString();
                 user.isVerified = true;
@@ -342,7 +342,7 @@ export async function configureBackend() {
                     .then(data => {
                         return data.length ? Math.max(...data.map(x => x.id)) + 1 : 1;
                     });
-                return id
+                return id;
                 // return users.length ? Math.max(...users.map(x => x.id)) + 1 : 1;
             }
 
