@@ -51,13 +51,18 @@ export async function configureBackend() {
 
             // route functions
 
-            function authenticate() {
+            async function authenticate() {
                 const { email, password } = body();
-                const user = users.find(x => x.email === email && x.password === password && x.isVerified);
+                
+                let allUsers = await accountService.getAll().then((data) => {
+                    return data;
+                })
+                const check = allUsers.find(x => x.email === email && x.password === password && x.isVerified);
 
-                if (!user) return error('הדוא"ל או הסיסמה שגויים.');
+                if (!check) return error('הדוא"ל או הסיסמה שגויים.');
 
                 // add refresh token to user
+                const user  = users.find(x => x.email === email && x.password === password && x.isVerified);
                 user.refreshTokens.push(generateRefreshToken());
                 localStorage.setItem(usersKey, JSON.stringify(users));
 
@@ -71,7 +76,7 @@ export async function configureBackend() {
                 });
             }
 
-            function refreshToken() {
+            async function refreshToken() {
                 const refreshToken = getRefreshToken();
                 
                 if (!refreshToken) return unauthorized();
@@ -95,7 +100,7 @@ export async function configureBackend() {
                 })
             }
 
-            function revokeToken() {
+            async function revokeToken() {
                 if (isAuthenticated()) return unauthorized();
                 
                 const refreshToken = getRefreshToken();
@@ -110,9 +115,13 @@ export async function configureBackend() {
 
             async function register() {
                 const user = body();
-    
-                if (users.find(x => x.email === user.email)) {
-                    return error(`הדוא"ל הזה $ {user.email} כבר קיים.`);
+
+                let allUsers = await accountService.getAll().then((data) => {
+                    return data;
+                })
+
+                if (allUsers.find(x => x.email === user.email)) {
+                    return error(`הדוא"ל הזה ${user.email} כבר קיים.`);
                 }
     
                 // assign user id and a few other properties then save
@@ -123,7 +132,7 @@ export async function configureBackend() {
                 // } else {
                 //     user.roleUser = Role.User;
                 // }
-                user.roleUser = Role.User;
+                user.roleUser = Role.Admin;
                 user.dateCreated = new Date().toISOString();
                 user.verificationToken = new Date().getTime().toString();
                 user.isVerified = true;
@@ -146,9 +155,14 @@ export async function configureBackend() {
                 return ok();
             }
     
-            function verifyEmail() {
+            async function verifyEmail() {
                 const { token } = body();
-                const user = users.find(x => !!x.verificationToken && x.verificationToken === token);
+
+                let allUsers = await accountService.getAll().then((data) => {
+                    return data;
+                })
+                
+                const user = allUsers.find(x => !!x.verificationToken && x.verificationToken === token);
 
                 if (!user) return error('האימות נכשל.');
                 
@@ -159,9 +173,14 @@ export async function configureBackend() {
                 return ok();
             }
 
-            function forgotPassword() {
+            async function forgotPassword() {
                 const { email } = body();
-                const user = users.find(x => x.email === email);
+
+                let allUsers = await accountService.getAll().then((data) => {
+                    return data;
+                })
+
+                const user = allUsers.find(x => x.email === email);
                 
                 // always return ok() response to prevent email enumeration
                 if (!user) return ok();
@@ -173,7 +192,7 @@ export async function configureBackend() {
 
                 // display password reset email in alert
                 setTimeout(() => {
-                    const resetUrl = `http://localhost:3000/account/reset-password?token=${user.resetToken}`;
+                    const resetUrl = `http://localhost:3000/account/reset-password?token=${user.verificationToken}`;
                     alertService.info(`
                     <h4>איפוס סיסמה</h4>
                     <p>אנא לחץ על הקישור למטה כדי לאפס את הסיסמה שלך, הקישור יהיה תקף ליום אחד:</p>
@@ -184,11 +203,15 @@ export async function configureBackend() {
                 return ok();
             }
 
-            function validateResetToken() {
+            async function validateResetToken() {
                 const { token } = body();
-                const user = users.find(x =>
-                    !!x.resetToken && x.resetToken === token &&
-                    new Date() < new Date(x.resetTokenExpires)
+
+                let allUsers = await accountService.getAll().then((data) => {
+                    return data;
+                })
+
+                const user = allUsers.find(x =>
+                    !!x.resetToken && x.resetToken === token
                 );
                 
                 if (!user) return error('אסימון לא חוקי.');
@@ -196,11 +219,15 @@ export async function configureBackend() {
                 return ok();
             }
 
-            function resetPassword() {
+            async function resetPassword() {
                 const { token, password } = body();
-                const user = users.find(x =>
-                    !!x.resetToken && x.resetToken === token &&
-                    new Date() < new Date(x.resetTokenExpires)
+
+                let allUsers = await accountService.getAll.then((data) => {
+                    return data;
+                })
+
+                const user = allUsers.find(x =>
+                    !!x.resetToken && x.resetToken === token
                 );
                 
                 if (!user) return error('אסימון לא חוקי.');
@@ -238,8 +265,12 @@ export async function configureBackend() {
             async function createUser() {
                 if (isAuthorized(Role.Admin)) return unauthorized();
 
+                let allUsers = await accountService.getAll().then((data) => {
+                    return data;
+                })
+
                 const user = body();
-                if (users.find(x => x.email === user.email)) {
+                if (allUsers.find(x => x.email === user.email)) {
                     return error(`הדוא"ל ${user.email} כבר רשום`);
                 }
 
@@ -256,13 +287,18 @@ export async function configureBackend() {
                 return ok();
             }
     
-            function updateUser() {
+            async function updateUser() {
                 if (isAuthenticated()) return unauthorized();
     
                 let params = body();
-                let user = users.find(x => x.id === idFromUrl());
 
-                // // users can update own profile and admins can update all profiles
+                let allUsers = await accountService.getAll().then((data) => {
+                    return data;
+                })
+
+                let user = allUsers.find(x => x.id === idFromUrl());
+
+                // users can update own profile and admins can update all profiles
                 // if (user.id !== currentUser().id && !isAuthorized(Role.Admin)) {
                 //     return unauthorized();
                 // }
@@ -286,10 +322,14 @@ export async function configureBackend() {
                 });
             }
     
-            function deleteUser() {
+            async function deleteUser() {
                 if (!isAuthenticated()) return unauthorized();
+
+                let allUsers = await accountService.getAll().then((data) => {
+                    return data;
+                })
     
-                let user = users.find(x => x.id === idFromUrl());
+                let user = allUsers.find(x => x.id === idFromUrl());
 
                 // users can delete own account and admins can delete any account
                 if (user.id !== currentUser().id && !isAuthorized(Role.Admin)) {

@@ -121,7 +121,7 @@ export const Home = () => {
                     </Link>
                     <Link className='DEBox' to="/course">
                         <div className="icon" style={{ background: "#0091ff" }}>
-                            <i class="devicon-vscode-plain"></i>
+                            <i className="devicon-vscode-plain"></i>
                         </div>
                         <div className="content">
                             <h2>ויזואל סטודיו קוד - VSCode</h2>
@@ -130,7 +130,7 @@ export const Home = () => {
                     </Link>
                     <Link className='DEBox' to="/course">
                         <div className="icon" style={{ background: "#48dc6b" }}>
-                            <i class="devicon-android-plain"></i>
+                            <i className="devicon-android-plain"></i>
                         </div>
                         <div className="content">
                             <h2>אנדרואיד סטודיו - Android</h2>
