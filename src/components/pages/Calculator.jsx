@@ -101,7 +101,7 @@ for (let i = 0; i < arr.length; i++) {
       prev = curr-prev;
   }
 
-  if (curr != element) 
+  if (curr !==  parseInt(element)) 
   {
     setResult("לא פיבונאצ'י");
     return

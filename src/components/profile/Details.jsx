@@ -6,19 +6,10 @@ import { accountService } from '../_services';
 
 export const Details = () => {
   const user = accountService.userValue;
-  const [markers] = useState([localStorage.getItem("lessonMarked")!==null?localStorage.getItem("lessonMarked"):""])
-  const [watched] = useState([localStorage.getItem("lessonWatched")!==null?localStorage.getItem("lessonWatched"):""])
+  const [markers] = useState([localStorage.getItem("lessonMarked") !== null ? localStorage.getItem("lessonMarked") : ""])
+  const [watched] = useState([localStorage.getItem("lessonWatched") !== null ? localStorage.getItem("lessonWatched") : ""])
   console.log(markers)
   return (
-    // <div>
-    //     <h1>My Profile</h1>
-    //     <p>
-    //         <strong>שם: </strong> {user.firstName} {user.lastName}<br />
-    //         <strong>דואר אלקטרוני: </strong> {user.email}
-    //     </p>
-    //     <p><Link to="/profile/update">עדכון פרופיל</Link></p>
-    //     <p><Link to="#" onClick={accountService.logout} className="nav-item nav-link">התנתק</Link></p>
-    // </div>
     <div className="container">
       <div className="mainProfile">
         <div className="row gutters-sm">
@@ -26,12 +17,19 @@ export const Details = () => {
             <div className="card">
               <div className="card-body">
                 <div className="d-flex flex-column align-items-center text-center">
-                  {/* <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150" /> */}
                   <img src='https://devshift.biz/wp-content/uploads/2017/04/profile-icon-png-898.png' alt="Admin" class="rounded-circle" width="150" />
                   <div className="mt-3">
                     <h4>שלום {user.firstName}</h4>
                     <p className="text-secondary mb-1">ברוך הבא </p>
                     <p className="text-muted font-size-sm">לרשותך עריכת פרטים וצפייה בנתונים</p>
+                    <div style={{ display: 'flex', justifyContent: 'space-around', width: '100%', margin: '20px 0px' }}>
+                      <Link to="/profile/update">
+                        <div style={{ background: '#48dc6b', padding: '8px 30px', borderRadius: '0.33rem', marginLeft: 4, color: '#ffffff', fontWeight: 500 }}>עדכון פרופיל</div>
+                      </Link>
+                      <Link to="#" onClick={accountService.logout}>
+                        <div style={{ background: '#ff4866', padding: '8px 30px', borderRadius: '0.33rem', color: '#ffffff', fontWeight: 500 }}>התנתק</div>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -44,7 +42,7 @@ export const Details = () => {
                   <div className="col-sm-3">
                     <h5 className="mb-0"> שם פרטי</h5>
                   </div>
-                  <div className="col-sm-9" style={{fontSize:'18px'}}>
+                  <div className="col-sm-9" style={{ fontSize: '18px' }}>
                     {user.firstName}
                   </div>
                 </div>
@@ -53,7 +51,7 @@ export const Details = () => {
                   <div className="col-sm-3">
                     <h5 className="mb-0">שם משפחה</h5>
                   </div>
-                  <div className="col-sm-9" style={{fontSize:'18px'}}>
+                  <div className="col-sm-9" style={{ fontSize: '18px' }}>
                     {user.lastName}
                   </div>
                 </div>
@@ -62,19 +60,12 @@ export const Details = () => {
                   <div className="col-sm-3">
                     <h5 className="mb-0">אימייל</h5>
                   </div>
-                  <div className="col-sm-9" style={{fontSize:'18px'}}>
+                  <div className="col-sm-9" style={{ fontSize: '18px' }}>
                     {user.email}
                   </div>
                 </div>
-             
+
                 <hr style={{ color: "black", backgroundColor: "black", height: 1 }} />
-                <div className="row">
-                  <div className="col-sm-12">
-                    <Link className="btn btn-info " style={{ backgroundColor: 'red !important',marginLeft:"500px" }} to="/profile/update"><div style={{ color: 'black' }}>עדכון פרופיל</div></Link>
-                    {/* <br /> */}
-                    <Button variant='danger'><Link to="#" onClick={accountService.logout} ><div style={{ color: 'black' }}>התנתק</div></Link></Button>
-                  </div>
-                </div>
               </div>
             </div>
             <div className="row gutters-sm">
@@ -90,9 +81,10 @@ export const Details = () => {
                         </div>
                       )
                     })}
-                             <Button onClick={()=>{localStorage.removeItem('lessonMarked');
-                    window.location.reload();
-                  }}>נקה רשימה</Button>
+                    <Button style={{ fontWeight: 500 }} onClick={() => {
+                      localStorage.removeItem('lessonMarked');
+                      window.location.reload();
+                    }}>נקה רשימה</Button>
                   </div>
                 </div>
               </div>
@@ -108,9 +100,10 @@ export const Details = () => {
                         </div>
                       )
                     })}
-                    <Button onClick={()=>{localStorage.removeItem('lessonWatched');
-                    window.location.reload();
-                  }}>נקה רשימה</Button>
+                    <Button style={{ fontWeight: 500 }} onClick={() => {
+                      localStorage.removeItem('lessonWatched');
+                      window.location.reload();
+                    }}>נקה רשימה</Button>
                     <div>
                       <div className="progress-bar bg-primary" role="progressbar" style={{ width: "66%" }} aria-valuenow="66" aria-valuemin="0" aria-valuemax="100">
                       </div>
