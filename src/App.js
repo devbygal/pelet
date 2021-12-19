@@ -12,11 +12,12 @@ import { Account } from './components/account/Index';
 import { Home } from './components/home/Home';
 import { Profile } from './components/profile/Index';
 import { Admin } from './components/admin/Index';
-import { Course } from './components/pages/Course';
+import { Courses } from './components/courses/Index';
 import { Exercise } from './components/pages/Exercise';
 import { Calculator } from './components/pages/Calculator';
 import { Vocabulary } from './components/pages/Vocabulary';
 import { Simulation } from './components/pages/Simulation';
+
 
 function App() {
   const [user, setUser] = useState({});
@@ -27,7 +28,7 @@ function App() {
   }, []);
 
   return (
-    <div style={{ width: '100%', position: 'fixed', top: 0, border: '1px solid #343B4B' }}>
+    <div style={{ width: '100%', position: 'fixed', top: 0 }}>
       <div className="startApp">
         <Navigation />
         <div className={'mainApp' + (!user ? ' notLogged' : '')}>
@@ -41,7 +42,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/profile/*" element={<Profile />} />
                 <Route path="/admin/*" roles={[Role.Admin]} element={<Admin />} />
-                <Route path="/course" element={<Course />} />
+                <Route path="/courses/*" element={<Courses />} />
                 <Route path="/exercise" element={<Exercise />} />
                 <Route path="/calculator" element={<Calculator />} />
                 <Route path="/vocabulary" element={<Vocabulary />} />

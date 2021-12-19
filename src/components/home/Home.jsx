@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export const Home = () => {
     return (
         <main className='mainHome'>
-            <div className="mainContentHome bVrYaT">
+            <div className="mainContentHome">
                 <div style={{ zIndex: 20, opacity: 1, transform: 'none' }}>
                     <h1 className="headerPelet">פ.ל.ת</h1>
                     <h1 className="headerToMain">האם כל אחד יכול להיות מתכנת? כן!</h1>
@@ -22,7 +22,7 @@ export const Home = () => {
                     <h2>כל הטכנולוגיות הרלוונטיות לקריירה!</h2>
                 </div>
                 <div className='containerCourses'>
-                    <Link className='coursesBox' to="/course">
+                    <Link className='coursesBox' to="/courses/course/10">
                         <div className="icon" style={{ background: "#fe5533" }}>
                             <i className="devicon-html5-plain-wordmark"></i>
                         </div>
@@ -31,7 +31,7 @@ export const Home = () => {
                             <p>בקורס זה תקבלו רקע וארגז כלים ראשוני ליצירת דפי אינטרנט בשפת ה-HTML.</p>
                         </div>
                     </Link>
-                    <Link className='coursesBox' to="/course">
+                    <Link className='coursesBox' to="/courses/course/20">
                         <div className="icon" style={{ background: "#48dc6b" }}>
                             <i className="devicon-javascript-plain"></i>
                         </div>
@@ -40,7 +40,7 @@ export const Home = () => {
                             <p></p>
                         </div>
                     </Link>
-                    <Link className='coursesBox' to="/course">
+                    <Link className='coursesBox' to="/courses/course/50">
                         <div className="icon" style={{ background: "#61d3fe" }}>
                             <i className="devicon-react-original"></i>
                         </div>
@@ -49,7 +49,7 @@ export const Home = () => {
                             <p>בקורס זה </p>
                         </div>
                     </Link>
-                    <Link className='coursesBox' to="/course">
+                    <Link className='coursesBox' to="/courses/course/120">
                         <div className="icon" style={{ background: "#6b71e5" }}>
                             <i className="devicon-jquery-plain"></i>
                         </div>
@@ -58,7 +58,7 @@ export const Home = () => {
                             <p></p>
                         </div>
                     </Link>
-                    <Link className='coursesBox' to="/course">
+                    <Link className='coursesBox' to="/courses/course/30">
                         <div className="icon" style={{ background: "#0091ff" }}>
                             <i className="devicon-typescript-plain"></i>
                         </div>
@@ -67,7 +67,7 @@ export const Home = () => {
                             <p></p>
                         </div>
                     </Link>
-                    <Link className='coursesBox' to="/course">
+                    <Link className='coursesBox' to="/courses/course/40">
                         <div className="icon" style={{ background: "#ff4866" }}>
                             <i className="devicon-angularjs-plain"></i>
                         </div>
@@ -76,7 +76,7 @@ export const Home = () => {
                             <p></p>
                         </div>
                     </Link>
-                    <Link className='coursesBox' to="/course">
+                    <Link className='coursesBox' to="/courses/course/60">
                         <div className="icon" style={{ background: "#fe5533" }}>
                             <i className="devicon-microsoftsqlserver-plain-wordmark"></i>
                         </div>
@@ -85,7 +85,7 @@ export const Home = () => {
                             <p></p>
                         </div>
                     </Link>
-                    <Link className='coursesBox' to="/course">
+                    <Link className='coursesBox' to="/courses/course/110">
                         <div className="icon" style={{ background: "#48dc6b" }}>
                             <i className="devicon-mongodb-plain-wordmark"></i>
                         </div>
@@ -94,7 +94,7 @@ export const Home = () => {
                             <p></p>
                         </div>
                     </Link>
-                    <Link className='coursesBox' to="/course">
+                    <Link className='coursesBox' to="/courses/course/100">
                         <div className="icon" style={{ background: "#6b71e5" }}>
                             <i className="devicon-bootstrap-plain"></i>
                         </div>
@@ -110,7 +110,7 @@ export const Home = () => {
                     <h2>סביבות פיתוח</h2>
                 </div>
                 <div className='containerDevelopmentEnvironments'>
-                    <Link className='DEBox' to="/course">
+                    <Link className='DEBox' to="/courses/course/70">
                         <div className="icon" style={{ background: "#6b71e5" }}>
                             <i className="devicon-visualstudio-plain"></i>
                         </div>
@@ -119,7 +119,7 @@ export const Home = () => {
                             <p></p>
                         </div>
                     </Link>
-                    <Link className='DEBox' to="/course">
+                    <Link className='DEBox' to="/courses/course/80">
                         <div className="icon" style={{ background: "#0091ff" }}>
                             <i className="devicon-vscode-plain"></i>
                         </div>
@@ -128,7 +128,7 @@ export const Home = () => {
                             <p></p>
                         </div>
                     </Link>
-                    <Link className='DEBox' to="/course">
+                    <Link className='DEBox' to="/courses/course/90">
                         <div className="icon" style={{ background: "#48dc6b" }}>
                             <i className="devicon-android-plain"></i>
                         </div>

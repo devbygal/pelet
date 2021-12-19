@@ -37,7 +37,7 @@ export const Navigation = () => {
         <nav className={'navigation' + (!user ? ' notLogged' : '')}>
             <div className="navTop">
                 <Link to="profile/details" className="navLink account" title='פרופיל'>
-                    <img src='' width="60" height="60" alt="" />
+                    <img src='https://devshift.biz/wp-content/uploads/2017/04/profile-icon-png-898.png' width="60" height="60" alt="" />
                     <div>
                         <p>
                             <b>{user.firstName} {user.lastName}</b>

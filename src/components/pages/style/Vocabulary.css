@@ -1,113 +1,101 @@
-.tile {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    background: rgb(78, 77, 77);
-    border-radius: 0.33rem;
-    max-width: 1000px;
-    min-height: 68px;
-    text-indent: 40px;
-    padding: 0.5rem 0rem 0.5rem 3rem;
-    margin: 5px 0;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    position: relative;
-    transition: all .3s ease-in-out;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+.adjust {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding: 0 40px;
+  margin: 80px 0px;
+  display: inline-block;
 }
 
-.tile:hover, .tile:focus {
-    background: rgba(255, 255, 255, 0.33);
-    cursor: pointer;
+.words .content {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 20px;
+  margin: 40px 0;
 }
 
-.tile[data-payload=false]:hover {
-    background: #c32828 !important;
-    transition: all 0.2s;
+.words .content .containWords {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border: 1px solid #5485e4;
+  border-radius: 0.33rem;
 }
 
-.tile[data-payload=false]::after {
-    content: "";
-    font-family: ElloIcons;
-    position: absolute;
-    left: 1rem;
+.words .content .containWords .wordBox {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform: translateY(0);
+  transition: 0.5s ease-in-out;
 }
 
-.tile[data-payload=true]::after {
-    content: ">";
-    font-family: ElloIcons;
-    position: absolute;
-    left: 1rem;
+.words .content .containWords:hover .wordBox {
+  transform: translateY(-100%);
 }
 
-.tile span {
-    font-size: 1.25rem;
-    margin: 0 1rem;
-    font-family: ElloIcons;
+.words .content .containWords .wordBox h2 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins';
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.033);
 }
 
-.tile img {
-    width: 1.25rem;
-    margin: 0 1rem;
-    font-family: ElloIcons;
+.words .content .containWords .meaningBox {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: #5e94ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(100%);
+  transition: 0.5s ease-in-out;
 }
 
-.tile_desc {
-    color: rgba(var(--txt_clr), 0.66);
-    font-size: 0.8rem;
+.words .content .containWords:hover .meaningBox {
+  transform: translateY(0);
 }
 
-
-
-
-.list-group-item {
-    padding: 0 !important;
+.words .content .containWords .meaningBox h2 {
+  color: #ffffff;
+  font-weight: 700;
 }
 
-.dropdown-toggle:after {
-    display: none !important; 
-  }
-
-  #dropdown-basic{
-      background-color: brown;
-      background: #282A35;
-      color:white;
-      cursor: pointer;
-      border-radius: 0% !important;
-      font-size: 18px;
-      /* padding:10px 10px 10px 20px; */
-      padding:10px 10px 10px 20px;
-      margin: 0!important;
-      border: 0 !important;
-      width: 100%;
-      border: 1px solid black !important;
-   
-  }
-  .list-group-item{
-      padding: 0;
-      border: 0 !important;;
-      width: 100%;
-      
-  }
-
-   .offcanvas-backdrop {
-position: relative !important;
-} 
-
-.offcanvas-end{
-    margin-top: 60px;
-    margin-right: 17px;
-    /* width: 100% !important; */
+.titleWordBank {
+  width: 100%;
+  text-align: center;
 }
 
-.offcanvas-backdrop{
-    background-color: white !important;
+.titleWordBank h2 {
+  position: relative;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+  font-size: 4em;
+  margin-top: 60px;
+  margin-bottom: 30px;
 }
 
-.offcanvas-body{
-    /* width: 100% !important; */
-    overflow-x: hidden !important;
-}
-
-.dropdown-menu{
-    border: white !important;
-    border-radius: 0% !important;
+.titleWordBank h2::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -10px;
+  width: 400px;
+  height: 1px;
+  background: #ffffff;
 }

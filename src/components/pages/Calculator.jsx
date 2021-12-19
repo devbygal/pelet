@@ -28,6 +28,25 @@ export const Calculator = () => {
     setResult(String.fromCharCode(result))
   }
 
+  const primal = () => {
+    if (result === "1") {setResult("false"); return}
+    if (result === "2") {setResult("true"); return}
+
+    var limit = Math.ceil(Math.sqrt(result)); //hoisting the loop limit
+    console.log(result)
+    console.log(limit)
+    
+    for (let i = 2; i <= limit; i++) {
+      if (result % i === 0)
+      {
+      setResult("false");
+      return
+      }
+    }
+    setResult("true");
+    console.log(result)
+  }
+
   return (
     <div className="CalcContainer">
 
@@ -101,8 +120,8 @@ export const Calculator = () => {
         <button name="char" onClick={toChar} className="programming">
           המרה לתו
         </button>
-        <button name="%" onClick={handleClick} className="programming">
-          טרם
+        <button name="%" onClick={primal} className="programming">
+          מס' ראשוני
         </button>
         <button name="%" onClick={handleClick} className="programming">
           טרם

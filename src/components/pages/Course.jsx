@@ -53,20 +53,21 @@ export const Course = () => {
   };
 
   return (
-    <div dir="ltr" className="body2">
+    <div className="body2">
       <h3 className="heading">html סרטונים</h3>
       <div className="containerVids">
         <div className="main-video">
           {/* סרטון שבו צופים בתצוגה ראשית בדף(מתחלפת לפי בחירה) */}
           <div className="video">
             <ReactPlayer
-              width="1300px" height="850px" className="video-react" url={`${videoChosen}`} controls muted autoPlay
+              width="1300px" height="850px" className="video-react" 
+              url={`${videoChosen}`} controls muted autoPlay
             ></ReactPlayer>
             <h3 className="title">{vidNum}</h3>
           </div>
         </div>
         {/* רשימת סרטונים מהשרת */}
-        <div className="video-list">
+        <div className="content">
           {videos.map((item, index) =>
             item.studyLanguageCode === 10 ? (
               <div
