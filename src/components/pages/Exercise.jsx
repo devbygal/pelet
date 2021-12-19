@@ -1,14 +1,15 @@
 import Button from "react-bootstrap/Button";
 import React, { useEffect, useState } from "react";
-import { Container, ListGroup, Modal, Nav, Navbar, Offcanvas } from "react-bootstrap";
+import { Container, ListGroup, Modal, Nav, Navbar, Offcanvas, Spinner } from "react-bootstrap";
 import "./style/Exercise.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import {fillInputs,checkAnswers,addInputs} from "./functions/FunctionsForPages";
+import { exerciseService } from "../_services/exercise.service";
 
 export const Exercise = () => {
   // תרגולים
-  const [exercises, setExercises] = useState([]);
-  const [currentExercise, setCurrentExercise] = useState(1);
+  const [exercises, setExercises] = useState([""]);
+  const [currentExercise, setCurrentExercise] = useState(0);
   const [input1, setInput1] = useState("");
   const [input2, setInput2] = useState("");
   const [input3, setInput3] = useState("");
@@ -19,10 +20,11 @@ export const Exercise = () => {
   const [input8, setInput8] = useState("");
   const [input9, setInput9] = useState("");
   const [input10, setInput10] = useState("");
+  const [id] = useState(10);
+  const [topicsHtml] = useState(["תכונות", "כותרות", "פסקאות", "סגנונות", "עיצוב", "הוספת גרשיים", "הערות", "סי אס אס", "לינקים", "תמונות", "טבלאות", "רשימות", "קלאסים", "זהות אישית", "מסגרות", "סקריפטים", "קוד מחשב", "טפסים", "תכונות בטספים", "אלמנטים בטפסים", "סוגי קלטים", "תכונות קלטים"]);
+  const [topicsJs] = useState(["פונקציות"]);
+  const [topicsCurrently]=useState(id===10?topicsHtml:topicsJs)
 
-
-  
-  const [topics] = useState(["תכונות", "כותרות", "פסקאות", "סגנונות", "עיצוב", "הוספת גרשיים", "הערות", "סי אס אס", "לינקים", "תמונות", "טבלאות", "רשימות", "קלאסים", "זהות אישית", "מסגרות", "סקריפטים", "קוד מחשב", "טפסים", "תכונות בטספים", "אלמנטים בטפסים", "סוגי קלטים", "תכונות קלטים"]);
 
   // עיצוב משתנה
   const [styleEx, setStyleEx] = useState("Exercise");
@@ -40,16 +42,10 @@ export const Exercise = () => {
     handleShow();
   };
 
-  // useEffect(() => {
-  //   getExercises();
-  // }, [exercises]);
-  
   useEffect(()=>{
-    getExercises();
-
+    getExercises()
     return () => {
         console.log("clean-upEX")
-        
       };
  },[])
 
@@ -62,29 +58,13 @@ export const Exercise = () => {
     setContainerAnswers(s5);
   };
   const getExercises = async () => {
-    await fetch("http://proj7.ruppin-tech.co.il/api/Exercises", {
-      method: "GET",
-      headers: {
-        Accept: "application/json; charset=UTF-8",
-        "Content-type": "application/json",
-      },
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((result) => {
-        if (result) {
-          setExercises(result);
-        } else {
-          console.log("error");
-        }
-      });
+    exerciseService.getAllExercises().then(x => setExercises(x))
   };
 
   return (
     <div className="bodyEx">
       {/* חלונית בדיקת פתרון */}
-      <Modal show={show} onHide={handleClose}>
+      <Modal className="ModalEx" show={show} onHide={handleClose}>
         <Modal.Header style={{ background: "#04AA6D", justifyContent: "center", color: "white" }}>
           <Modal.Title>בדיקה</Modal.Title>
         </Modal.Header>
@@ -95,11 +75,11 @@ export const Exercise = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-
       {/* בוטסראפ ניווט צד */}
-      <Navbar style={{ background: "#04AA6D" ,direction:'rtl'}} expand={false}>
+      <Navbar style={{ background: "black" ,direction:'rtl'}} expand={false}>
         <Container fluid>
           <Navbar.Toggle
+          style={{backgroundColor:'white'}}
             onClick={() => {
               chngeStyleEx("ExerciseWithBarOpen", "textExBarOpen", "btnex1Open", "btnex2Open", "answersExOpen");
             }}
@@ -118,7 +98,7 @@ export const Exercise = () => {
               <Nav className="justify-content-end flex-grow-1">
                 <ListGroup>
                   {/* לקיחת הנתונים לניווט מהשרת */}
-                  {topics.map((topic, index) => (
+                  {topicsCurrently.map((topic, index) => (
                     <ListGroup.Item key={index}>
                       {/* תרגיל {ex.exerciseCode} */}
                       <Dropdown>
@@ -126,7 +106,7 @@ export const Exercise = () => {
                           {topic}
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                          {exercises.filter((item) => item.exerciseTopic === topic).map((ex, index) =>
+                          {exercises.filter((item) => item.exerciseTopic === topic&&item.studyLanguageCode===id).map((ex, index) =>
                               <Dropdown.Item
                                 key={index}
                                 onClick={() => {
@@ -149,8 +129,7 @@ export const Exercise = () => {
         </Container>
       </Navbar>
       {/* הצגת התרגול עצמו */}
-      {exercises.filter((item) => item.exerciseCode === currentExercise).map((ex,index) =>
-       
+      {exercises[0]!==""?exercises.filter((item) => item.exerciseCode === currentExercise).map((ex,index) =>
           <div key={index}>
             <div className="mainExercise">
               <div className={styleExText}>
@@ -184,8 +163,7 @@ export const Exercise = () => {
               <p title="par"></p>
             </div>
           </div>
-        
-      )}
+      ):<Spinner animation="border" className="spinnerCenter" />}
     </div>
   );
 };

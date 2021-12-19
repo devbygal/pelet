@@ -17,6 +17,7 @@ export const Admin = () => {
                     <Link to="/admin/courses" className="nav-item nav-link">קורסים</Link>
                     <Link to="/admin/exercises" className="nav-item nav-link">תרגולים</Link>
                     <Link to="/admin/words" className="nav-item nav-link"> מילים</Link>
+                    <Link to="/admin/words" className="nav-item nav-link"> ממשק הוספה שני</Link>
                     <Link to="/admin/convertToInserts" className="nav-item nav-link">המרה לאינסרטים</Link>
                 </div>
             </nav>

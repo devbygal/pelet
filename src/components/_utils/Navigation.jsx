@@ -61,7 +61,7 @@ export const Navigation = () => {
                 <Link className="navLink" to="simulation" onClick={() => handleActive()}>
                 <RiIcons.RiTerminalLine /> סימולציה
                 </Link>
-                <Link className="navLink" to="exercise" onClick={() => handleActive()}>
+                <Link className="navLink" to="/exercises/display" onClick={() => handleActive()}>
                 <RiIcons.RiCodeSLine /> תרגולים
                 </Link>
                 <Link className="navLink" to="vocabulary" onClick={() => handleActive()}>

@@ -99,7 +99,7 @@ export const Details = () => {
                                 <div className="card h-100">
                                     <div className="card-body">
                                         <h6 className="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">שיעורים שסומנו</i></h6>
-                                        <small>שיעור {localStorage.getItem("markLessonCode")} </small>
+                                        <small>שיעור {localStorage.getItem("lessonMarked")} </small>
 
                                     </div>
                                 </div>

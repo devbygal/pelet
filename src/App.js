@@ -13,7 +13,7 @@ import { Home } from './components/home/Home';
 import { Profile } from './components/profile/Index';
 import { Admin } from './components/admin/Index';
 import { Courses } from './components/courses/Index';
-import { Exercise } from './components/pages/Exercise';
+import { Exercises } from './components/exercises/Index';
 import { Calculator } from './components/pages/Calculator';
 import { Vocabulary } from './components/pages/Vocabulary';
 import { Simulation } from './components/pages/Simulation';
@@ -43,7 +43,7 @@ function App() {
                 <Route path="/profile/*" element={<Profile />} />
                 <Route path="/admin/*" roles={[Role.Admin]} element={<Admin />} />
                 <Route path="/courses/*" element={<Courses />} />
-                <Route path="/exercise" element={<Exercise />} />
+                <Route path="/exercises/*" element={<Exercises />} />
                 <Route path="/calculator" element={<Calculator />} />
                 <Route path="/vocabulary" element={<Vocabulary />} />
                 <Route path="/simulation" element={<Simulation />} />

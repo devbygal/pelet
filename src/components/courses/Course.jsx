@@ -13,9 +13,10 @@ export const Course = () => {
   const [style, setStyle] = useState("vid");
   const [last, setLast] = useState();
   const [vidNum, setVidNum] = useState("1")
-
   const { id } = useParams();
   const navigate = useNavigate();
+  const [mark,setMark] = useState([])
+
 
   useEffect(() => {
     getVideos();
@@ -70,6 +71,26 @@ export const Course = () => {
     }
   }
 
+  const AddMarker=(data)=>{
+     let item=[data]
+     let items=[localStorage.getItem('lessonMarked')]
+    if(localStorage.getItem('lessonMarked')===null)
+      {
+       console.log("doesn't exist")
+       localStorage.setItem('lessonMarked',(item))
+      }
+      else 
+      {
+        items.push(data)
+        localStorage.removeItem('lessonMarked')
+        localStorage.setItem('lessonMarked',(items))
+
+
+      }
+      // onClick={()=>{localStorage.setItem('lessonMarked',`${item.lessonCode} בקורס ${headerForCourse(item.studyLanguageCode)}`)}}
+
+  }
+
   return (
     <>
       <div className="mainCourse">
@@ -116,7 +137,7 @@ export const Course = () => {
                       fontSize: 24,
                     }}>
                       <Link className='watchVideo' to="#" title="צפיתי"><RiIcons.RiEyeLine /></Link>
-                      <Link className='markVideo' to="#" title="סמן סרטון"><RiIcons.RiErrorWarningLine /></Link>
+                      <Link className='markVideo' onClick={()=>{AddMarker(`${item.lessonCode} בקורס ${headerForCourse(item.studyLanguageCode)}`)}}  to="#" title="סמן סרטון"><RiIcons.RiErrorWarningLine /></Link>
                     </div>
                   </div>
                 </div>
