@@ -16,6 +16,7 @@ export const Course = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [mark,setMark] = useState([])
+  
 
 
   useEffect(() => {
@@ -72,8 +73,26 @@ export const Course = () => {
   }
 
   const AddMarker=(data)=>{
+
      let item=[data]
-     let items=[localStorage.getItem('lessonMarked')]
+     let items =[]
+      let arrayOfLessons=[]
+      if(localStorage.getItem('lessonMarked')!==null)
+     {
+      items=[localStorage.getItem('lessonMarked')]
+      arrayOfLessons=items[0].toString().split(',')
+      console.log(arrayOfLessons)
+      console.log(item)
+      for (let i = 0; i < arrayOfLessons.length; i++)
+       {
+      const element = arrayOfLessons[i];
+      if(element===data)
+      {
+        console.log("we are the championsss!!")
+       return
+      }
+    }
+     }
     if(localStorage.getItem('lessonMarked')===null)
       {
        console.log("doesn't exist")
@@ -84,13 +103,44 @@ export const Course = () => {
         items.push(data)
         localStorage.removeItem('lessonMarked')
         localStorage.setItem('lessonMarked',(items))
-
-
       }
-      // onClick={()=>{localStorage.setItem('lessonMarked',`${item.lessonCode} בקורס ${headerForCourse(item.studyLanguageCode)}`)}}
-
   }
 
+
+
+  const lessonWatched=(data)=>{
+    let item=[data]
+    let items =[]
+     let arrayOfLessons=[]
+     if(localStorage.getItem('lessonWatched')!==null)
+    {
+     items=[localStorage.getItem('lessonWatched')]
+     arrayOfLessons=items[0].toString().split(',')
+     console.log(arrayOfLessons)
+     console.log(item)
+     for (let i = 0; i < arrayOfLessons.length; i++)
+      {
+     const element = arrayOfLessons[i];
+     if(element===data)
+     {
+       console.log("we are the championsss!!")
+      return
+     }
+   }
+    }
+   if(localStorage.getItem('lessonWatched')===null)
+     {
+      console.log("doesn't exist")
+      localStorage.setItem('lessonWatched',(item))
+     }
+     else 
+     {
+       items.push(data)
+       localStorage.removeItem('lessonWatched')
+       localStorage.setItem('lessonWatched',(items))
+     }
+
+ }
   return (
     <>
       <div className="mainCourse">
@@ -136,8 +186,8 @@ export const Course = () => {
                       flexDirection: 'row',
                       fontSize: 24,
                     }}>
-                      <Link className='watchVideo' to="#" title="צפיתי"><RiIcons.RiEyeLine /></Link>
-                      <Link className='markVideo' onClick={()=>{AddMarker(`${item.lessonCode} בקורס ${headerForCourse(item.studyLanguageCode)}`)}}  to="#" title="סמן סרטון"><RiIcons.RiErrorWarningLine /></Link>
+                      <Link className='watchVideo'onClick={()=>{lessonWatched(`${item.description} בקורס ${headerForCourse(item.studyLanguageCode)}`)}} to="#" title="צפיתי"><RiIcons.RiEyeLine /></Link>
+                      <Link className='markVideo' onClick={()=>{AddMarker(`${item.description} בקורס ${headerForCourse(item.studyLanguageCode)}`)}}  to="#" title="סמן סרטון"><RiIcons.RiErrorWarningLine /></Link>
                     </div>
                   </div>
                 </div>

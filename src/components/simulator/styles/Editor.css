@@ -1,7 +1,4 @@
-
-
-
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 /* EDITOR */
 .top-pane {
     background-color: hsl(225, 6%, 25%) !important;
@@ -26,6 +23,7 @@
     flex-direction: column !important;
     padding: .5rem !important;
     background-color: #202020 !important;
+    font-family: 'Poppins';
   }
   
   .editor-container.collapsed {
@@ -48,7 +46,7 @@
   .editor-title {
     display: flex !important;
     justify-content: space-between !important;
-    background-color: #2cbbe8 !important;
+    background-color: #007bff !important;
     color: white !important;
     padding: .5rem .5rem .5rem 1rem !important;
     border-top-right-radius: .5rem !important;

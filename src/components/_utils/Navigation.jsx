@@ -47,7 +47,7 @@ export const Navigation = () => {
                         </p>
                     </div>
                 </Link>
-                <input type="text" className="search" placeholder="מצא..." name="search" />
+                {/* <input type="text" className="search" placeholder="מצא..." name="search" /> */}
             </div>
             <div className="navBottom">
                 {user.roleUser === Role.Admin &&

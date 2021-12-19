@@ -1,16 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-npm
 
 export const Display = () => {
-
-
-  useEffect(() => {
-
-  }, [])
-
   return (
-    <div className="container">
-    </div>
+    <div>
+      <Link to="/exercises/exercise/1">
+        תרגילים html
+    </Link>
+    <Link to="/exercises/quiz">
+        מבחן
+    </Link></div>
   );
 }
