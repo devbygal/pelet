@@ -4,6 +4,13 @@
   "description": "פלטפורמה ללימוד תוכנה",
   "author": "pelet",
   "main": "public/electron.js",
+  "build": {
+    "appId": "פ.ל.ת.menu",
+    "win": {
+      "icon": "build/icon.ico"
+    }
+  },
+  "homepage": "./",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",

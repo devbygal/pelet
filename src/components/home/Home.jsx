@@ -37,7 +37,7 @@ export const Home = () => {
                         </div>
                         <div className="content">
                             <h2>ג'אווה סקריפט - Javascript</h2>
-                            <p></p>
+                            <p>בקורס זה תקבלו רקע וארגז כלים ראשוני ליצירת דפי אינטרנט בשפת ה-JavaScript.</p>
                         </div>
                     </Link>
                     <Link className='coursesBox' to="/courses/course/50">
@@ -46,7 +46,7 @@ export const Home = () => {
                         </div>
                         <div className="content">
                             <h2>ריאקט - React</h2>
-                            <p>בקורס זה </p>
+                            <p>בקורס זה תקבלו רקע וארגז כלים ראשוני ליצירת דפי אינטרנט בשפת ה-React.</p>
                         </div>
                     </Link>
                     <Link className='coursesBox' to="/courses/course/120">
@@ -55,7 +55,7 @@ export const Home = () => {
                         </div>
                         <div className="content">
                             <h2>ג'קורי - Jquery</h2>
-                            <p></p>
+                            <p>בקורס זה תקבלו רקע וארגז כלים ראשוני ליצירת דפי אינטרנט בשפת ה-Jquery.</p>
                         </div>
                     </Link>
                     <Link className='coursesBox' to="/courses/course/30">
@@ -64,7 +64,7 @@ export const Home = () => {
                         </div>
                         <div className="content">
                             <h2>טייפ סקריפט - TypeScript</h2>
-                            <p></p>
+                            <p>בקורס זה תקבלו רקע וארגז כלים ראשוני ליצירת דפי אינטרנט בשפת ה-TypeScript.</p>
                         </div>
                     </Link>
                     <Link className='coursesBox' to="/courses/course/40">
@@ -73,7 +73,7 @@ export const Home = () => {
                         </div>
                         <div className="content">
                             <h2>אנגולר - Angular</h2>
-                            <p></p>
+                            <p>בקורס זה תקבלו רקע וארגז כלים ראשוני ליצירת דפי אינטרנט בשפת ה-Angular.</p>
                         </div>
                     </Link>
                     <Link className='coursesBox' to="/courses/course/60">
@@ -82,7 +82,7 @@ export const Home = () => {
                         </div>
                         <div className="content">
                             <h2>מסד נתונים - SQL Server</h2>
-                            <p></p>
+                            <p>בקורס זה תקבלו רקע וארגז כלים ראשוני ליצירת מסד נתונים בשפת ה-SQL Server.</p>
                         </div>
                     </Link>
                     <Link className='coursesBox' to="/courses/course/110">
@@ -91,7 +91,7 @@ export const Home = () => {
                         </div>
                         <div className="content">
                             <h2>מסד נתונים - Mongo DB</h2>
-                            <p></p>
+                            <p>בקורס זה תקבלו רקע וארגז כלים ראשוני ליצירת מסד נתונים בשפת ה-Mongo DB.</p>
                         </div>
                     </Link>
                     <Link className='coursesBox' to="/courses/course/100">
@@ -100,7 +100,7 @@ export const Home = () => {
                         </div>
                         <div className="content">
                             <h2>בוטספטראפ - Bootstrap</h2>
-                            <p></p>
+                            <p>בקורס זה תקבלו רקע וארגז כלים ראשוני ליצירת עיצוב דפי אינטרנט בשפת ה-Bootstrap.</p>
                         </div>
                     </Link>
                 </div>
@@ -116,7 +116,7 @@ export const Home = () => {
                         </div>
                         <div className="content">
                             <h2>ויזואל סטודיו - Visual Studio</h2>
-                            <p></p>
+                            <p>סביבת פיתוח לעבודה.</p>
                         </div>
                     </Link>
                     <Link className='DEBox' to="/courses/course/80">
@@ -125,7 +125,7 @@ export const Home = () => {
                         </div>
                         <div className="content">
                             <h2>ויזואל סטודיו קוד - VSCode</h2>
-                            <p></p>
+                            <p>סביבת פיתוח לעבודה.</p>
                         </div>
                     </Link>
                     <Link className='DEBox' to="/courses/course/90">
@@ -134,7 +134,7 @@ export const Home = () => {
                         </div>
                         <div className="content">
                             <h2>אנדרואיד סטודיו - Android</h2>
-                            <p></p>
+                            <p>סביבת פיתוח לעבודה.</p>
                         </div>
                     </Link>
                 </div>

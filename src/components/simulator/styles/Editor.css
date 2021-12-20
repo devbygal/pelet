@@ -64,3 +64,9 @@
     overflow: hidden;
   }
 
+
+  .cm-s-material.CodeMirror {
+    background-color: #263238;
+    color: #EEFFFF;
+    height: 500px;
+}

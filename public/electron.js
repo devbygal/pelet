@@ -31,8 +31,15 @@ function createWindow() {
     }
   })
 
+  const splash = new BrowserWindow({width: 810, height: 610, transparent: true, frame: false, alwaysOnTop: true});
+  splash.loadURL(`file://${__dirname}/splash.html`);
   // and load the index.html of the app.
   mainWindow.loadURL(isDev ? "http://localhost:3000" : `file://${path.join(__dirname, "../build/index.html")}`)
+
+  mainWindow.once('ready-to-show', () => {
+    splash.destroy();
+    mainWindow.show();
+  });
 
   // Close App
   ipcMain.on('close-app', () => {

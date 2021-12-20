@@ -52,7 +52,7 @@ export async function configureBackend() {
             // route functions
 
             async function authenticate() {
-                const { email, password, roleUser } = body();
+                const { email, password } = body();
                 
                 let allUsers = await accountService.getAll().then((data) => {
                     return data;
@@ -61,11 +61,10 @@ export async function configureBackend() {
 
                 if (!check) return error('הדוא"ל או הסיסמה שגויים.');
 
-                if (allUsers.find(x => x.email === email && x.password === password && x.isVerified && x.roleUser === 'מנהל'))
-                {
-                    user.roleUser = Role.Admin;
-                }
-
+                // if (allUsers.find(x => x.isVerified && x.roleUser === 'מנהל'))
+                // {
+                //     user.roleUser = Role.Admin;
+                // }
                 // add refresh token to user
                 const user  = users.find(x => x.email === email && x.password === password && x.isVerified);
                 user.refreshTokens.push(generateRefreshToken());

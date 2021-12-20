@@ -17,7 +17,7 @@ export const Details = () => {
             <div className="card">
               <div className="card-body">
                 <div className="d-flex flex-column align-items-center text-center">
-                  <img src='https://devshift.biz/wp-content/uploads/2017/04/profile-icon-png-898.png' alt="Admin" class="rounded-circle" width="150" />
+                  <img src='https://devshift.biz/wp-content/uploads/2017/04/profile-icon-png-898.png' alt="Admin" className="rounded-circle" width="150" />
                   <div className="mt-3">
                     <h4>שלום {user.firstName}</h4>
                     <p className="text-secondary mb-1">ברוך הבא </p>
@@ -47,7 +47,7 @@ export const Details = () => {
                   </div>
                 </div>
                 <hr style={{ color: "black", backgroundColor: "black", height: 1 }} />
-                <div class="row">
+                <div className="row">
                   <div className="col-sm-3">
                     <h5 className="mb-0">שם משפחה</h5>
                   </div>
@@ -72,7 +72,7 @@ export const Details = () => {
               <div className="col-sm-6 mb-3">
                 <div className="card h-100">
                   <div className="card-body">
-                    <h5 className="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">שיעורים שסומנו</i></h5>
+                    <h5 className="d-flex align-items-center mb-3"><i className="material-icons text-info mr-2">שיעורים שסומנו</i></h5>
                     {markers[0].split(',').map((m, i) => {
                       return (
                         <div key={i}>
@@ -91,7 +91,7 @@ export const Details = () => {
               <div className="col-sm-6 mb-3">
                 <div className="card h-100">
                   <div className="card-body">
-                    <h5 className="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">שיעורים שנצפו</i> </h5>
+                    <h5 className="d-flex align-items-center mb-3"><i className="material-icons text-info mr-2">שיעורים שנצפו</i> </h5>
                     {watched[0].split(',').map((m, i) => {
                       return (
                         <div key={i}>

@@ -1,0 +1,69 @@
+.mainExercises {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #262626;
+}
+
+.mainContentEx {
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.mainContainer {
+    position: relative;
+    display: flex;
+    -webkit-box-reflect: below 1px linear-gradient(transparent, transparent, transparent, #0004);
+}
+
+.mainContainer .box {
+    position: relative;
+    width: 320px;
+    height: 400px;
+    margin: 0 20px;
+    border-radius: 20px;
+    background: linear-gradient(-45deg, #2da2ff 25%,
+    #444444 25%, #444444 50%, #2da2ff 50%, #2da2ff 75%,
+    #444444 75%, #444444 100%);
+    background-size: 40px 40px;
+    filter: grayscale(1);
+    animation: animateBg 1s linear infinite;
+    animation-play-state: paused;
+    transition: filter 1s;
+    display: flex;
+    justify-content: center;
+}
+
+.mainContainer .box:nth-child(2) {
+    background: linear-gradient(-135deg, #ff61ae 25%,
+    #444444 25%, #444444 50%, #ff61ae 50%, #ff61ae 75%,
+    #444444 75%, #444444 100%);
+    background-size: 40px 40px;
+}
+
+.mainContainer .box:hover {
+    animation-play-state: running;
+    filter: grayscale(0);
+}
+
+@keyframes animateBg {
+    0% {
+        background-position: 100%;
+    }
+    100% {
+        background-position: 40px;
+    }
+}
+
+.mainContainer .box img {
+    position: absolute;
+    bottom: 0;
+    height: 70%;
+    transition: height 0.5s;
+}
+
+.mainContainer .box:hover img {
+    height: 380px;
+}
